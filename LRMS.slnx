@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LRMS.Application/LRMS.Application.csproj" />
+    <Project Path="src/LRMS.Infrastructure/LRMS.Infrastructure.csproj" />
+    <Project Path="src/LRMS.Web/LRMS.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
