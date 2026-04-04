@@ -39,7 +39,7 @@ public partial class Program
     {
         using IServiceScope scope = services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<LrmsDbContext>().Database;
-        //db.EnsureDeleted();
+        db.EnsureDeleted();
         db.EnsureCreated();
     }
 }

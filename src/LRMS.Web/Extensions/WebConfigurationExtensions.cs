@@ -1,6 +1,4 @@
-﻿using LRMS.Web.Options;
-
-namespace LRMS.Web.Extensions;
+﻿namespace LRMS.Web.Extensions;
 
 internal static class WebConfigurationExtensions
 {
@@ -8,7 +6,6 @@ internal static class WebConfigurationExtensions
     {
         public IServiceCollection ConfigureOptions()
         {
-            services.AddOptions<SpaceSettingsOptions>().BindConfiguration("SpaceSettingsOptions");
             return services;
         }
     }

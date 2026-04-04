@@ -1,4 +1,5 @@
 ﻿using LRMS.Infrastructure.Persistence;
+using LRMS.Infrastructure.Persistence.Seeder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +11,16 @@ public static class InfrastructureConfigurationExtensions
     {
         public IServiceCollection UseNpgsql(string? connectionString)
         {
-            services.AddDbContext<LrmsDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<LrmsDbContext>(options => options
+                .UseNpgsql(connectionString)
+                .UseSeeding((context, _) =>
+                {
+                    if (context is not LrmsDbContext lrmsDbContext)
+                        throw new Exception("Invalid type for DbContext.");
+
+                    var seeder = new LrmsSeeder(lrmsDbContext);
+                    seeder.Seed();
+                }));
 
             return services;
         }
