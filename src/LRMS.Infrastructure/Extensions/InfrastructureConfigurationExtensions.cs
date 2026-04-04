@@ -1,4 +1,6 @@
-﻿using LRMS.Infrastructure.Persistence;
+﻿using LRMS.Application.Repositories;
+using LRMS.Infrastructure.Persistence;
+using LRMS.Infrastructure.Persistence.Repositories;
 using LRMS.Infrastructure.Persistence.Seeder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,8 @@ public static class InfrastructureConfigurationExtensions
                     var seeder = new LrmsSeeder(lrmsDbContext);
                     seeder.Seed();
                 }));
+
+            services.AddScoped<IReservationRequestRepository, ReservationRequestRepository>();
 
             return services;
         }

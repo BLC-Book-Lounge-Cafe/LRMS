@@ -1,5 +1,4 @@
-﻿using LRMS.Infrastructure.Persistence.Configurations;
-using LRMS.Infrastructure.Persistence.Models;
+﻿using LRMS.Infrastructure.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LRMS.Infrastructure.Persistence;
@@ -15,9 +14,9 @@ public class LrmsDbContext : DbContext
     }
 
     public virtual DbSet<SpaceSettingsEntity> SpaceSettings { get; set; }
+    public virtual DbSet<ReservationRequestEntity> ReservationRequests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        new SpaceSettingsEntityTypeConfiguration().Configure(modelBuilder.Entity<SpaceSettingsEntity>());
     }
 }

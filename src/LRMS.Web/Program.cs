@@ -2,6 +2,8 @@ using LRMS.Application.Extensions;
 using LRMS.Infrastructure.Extensions;
 using LRMS.Infrastructure.Persistence;
 using LRMS.Web.Extensions;
+using LRMS.Web.Middleware;
+using LRMS.Web.OpenApi;
 using Scalar.AspNetCore;
 using System.Reflection;
 
@@ -10,13 +12,17 @@ public partial class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.Services.AddOpenApi();
+        builder.Services.AddOpenApi(c => c.AddOperationTransformer(new ReturnCodeOpenApiOperationTransformer()));
         builder.Services.ConfigureOptions();
 
         if (!IsBuildTask())
             RegisterServices(builder);
 
         var app = builder.Build();
+
+        if (!IsBuildTask())
+            app.UseExceptionHandler(_ => { });
+
         app.MapOpenApi();
         app.MapScalarApiReference();
         app.MapApi();
@@ -33,6 +39,7 @@ public partial class Program
     {
         builder.Services.UseNpgsql(builder.Configuration.GetConnectionString(nameof(LrmsDbContext)));
         builder.Services.RegisterApplicationServices();
+        builder.Services.AddExceptionHandler<CommonExceptionHandler>();
     }
 
     private static void InitializeDatabase(IServiceProvider services)
