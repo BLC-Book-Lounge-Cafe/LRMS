@@ -1,0 +1,35 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+# Copy solution and project files
+COPY ["LRMS.slnx", "."]
+COPY ["src/LRMS.Application/LRMS.Application.csproj", "src/LRMS.Application/"]
+COPY ["src/LRMS.Infrastructure/LRMS.Infrastructure.csproj", "src/LRMS.Infrastructure/"]
+COPY ["src/LRMS.Web/LRMS.Web.csproj", "src/LRMS.Web/"]
+
+# Restore dependencies for all projects
+RUN dotnet restore "LRMS.slnx"
+
+# Copy all source code
+COPY . .
+
+# Build the solution
+WORKDIR "/src/src/LRMS.Web"
+RUN dotnet build "LRMS.Web.csproj" -c Release -o /app/build
+
+# Publish the API project
+FROM build AS publish
+RUN dotnet publish "LRMS.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+# Copy published output
+COPY --from=publish /app/publish .
+
+# Set entry point
+ENTRYPOINT ["dotnet", "LRMS.Web.dll"]
