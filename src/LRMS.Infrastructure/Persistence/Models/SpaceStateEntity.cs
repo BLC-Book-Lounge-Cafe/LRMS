@@ -2,7 +2,7 @@
 
 namespace LRMS.Infrastructure.Persistence.Models;
 
-[Table("space_settings")]
+[Table("space_state")]
 public class SpaceStateEntity
 {
     [Column("id")]
