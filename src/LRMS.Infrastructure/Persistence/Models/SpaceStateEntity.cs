@@ -14,7 +14,7 @@ public class SpaceStateEntity
     [Column("description")]
     public required string Description { get; set; }
 
-    [Column("current_track")]
+    [Column("current_track", TypeName = "jsonb")]
     public required string CurrentTrack { get; set; }
 
     [Column("updated_at")]

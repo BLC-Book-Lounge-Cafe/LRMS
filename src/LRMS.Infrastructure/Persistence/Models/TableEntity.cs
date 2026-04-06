@@ -14,7 +14,7 @@ public class TableEntity
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("coordinates")]
+    [Column("coordinates", TypeName = "jsonb")]
     public string? Coordinates { get; set; }
 
     [Column("description")]

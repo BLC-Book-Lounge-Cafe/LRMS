@@ -8,10 +8,10 @@ public class TableReservationEntity
     [Column("id")]
     public long Id { get; set; }
 
-    [Column("customer_name")]
+    [Column("customer_name", TypeName = "varchar(255)")]
     public required string CustomerName { get; set; }
 
-    [Column("customer_phone")]
+    [Column("customer_phone", TypeName = "varchar(30)")]
     public required string CustomerPhone { get; set; }
 
     [Column("table_id")]
