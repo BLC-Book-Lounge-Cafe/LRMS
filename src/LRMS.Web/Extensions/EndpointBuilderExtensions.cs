@@ -30,6 +30,7 @@ public static class EndpointBuilderExtensions
         public IEndpointRouteBuilder MapApi()
         {
             endpointRouteBuilder.MapReservationRequestsApi();
+            endpointRouteBuilder.MapSpaceStateApi();
             return endpointRouteBuilder;
         }
     }

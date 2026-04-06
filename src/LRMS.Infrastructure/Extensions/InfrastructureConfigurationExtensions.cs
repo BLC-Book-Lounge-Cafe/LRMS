@@ -25,6 +25,7 @@ public static class InfrastructureConfigurationExtensions
                 }));
 
             services.AddScoped<IReservationRequestRepository, ReservationRequestRepository>();
+            services.AddScoped<ISpaceStateRepository, SpaceStateRepository>();
 
             return services;
         }

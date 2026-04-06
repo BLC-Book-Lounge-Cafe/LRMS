@@ -8,5 +8,5 @@ namespace LRMS.Infrastructure.Mappers;
 public partial class ReservationRequestMapper
 {
     [MapperIgnoreSource(nameof(ReservationRequestEntity.CreatedAt))]
-    public static partial ReservationRequestDto ToDto(ReservationRequestEntity car);
+    public static partial ReservationRequestDto ToDto(ReservationRequestEntity entity);
 }

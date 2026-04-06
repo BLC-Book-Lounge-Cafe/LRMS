@@ -10,6 +10,7 @@ public static class ApplicationConfigurationExtensions
         public IServiceCollection RegisterApplicationServices()
         {
             services.AddScoped<IReservationRequestService, ReservationRequestService>();
+            services.AddScoped<ISpaceStateService, SpaceStateService>();
             return services;
         }
     }
