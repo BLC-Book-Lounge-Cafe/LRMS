@@ -12,6 +12,9 @@ public partial class ReservationRequestService(IReservationRequestRepository rep
 
     public async Task CreateReservationRequest(CreateReservationRequestCommand command, CancellationToken ct = default)
     {
+        if (command.CustomerName.Length > 255)
+            throw new DomainException("Имя клиента слишком длинное. Максимальное количество символов 255.");
+
         if (!CustomerNumberRegex().IsMatch(command.CustomerPhone))
             throw new DomainException("Номер клиента не соответствует формату.");
 

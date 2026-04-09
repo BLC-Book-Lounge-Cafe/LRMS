@@ -11,6 +11,7 @@ public static class ApplicationConfigurationExtensions
         {
             services.AddScoped<IReservationRequestService, ReservationRequestService>();
             services.AddScoped<ISpaceStateService, SpaceStateService>();
+            services.AddScoped<ITableReservationService, TableReservationService>();
             return services;
         }
     }

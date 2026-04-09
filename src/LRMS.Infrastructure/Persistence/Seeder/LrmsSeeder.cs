@@ -23,9 +23,11 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
 
         var spaceSettings = new SpaceSettingsEntity
         {
-            StartTime = new(9, 0),
-            EndTime = new(21, 0),
-            MinTableReservationTime = TimeSpan.FromMinutes(60)
+            StartTime = DateTime.SpecifyKind(new(new DateOnly(), new TimeOnly(9, 0)), DateTimeKind.Utc),
+            EndTime = DateTime.SpecifyKind(new(new DateOnly(), new TimeOnly(21, 0)), DateTimeKind.Utc),
+            MinTableReservationTime = 60,
+            TableReservationPeriod = 30,
+            BookReservationPeriod = 30
         };
 
         _dbContext.SpaceSettings.Add(spaceSettings);

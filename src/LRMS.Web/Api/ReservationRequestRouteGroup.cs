@@ -20,7 +20,7 @@ internal static class ReservationRequestRouteGroup
                 .WithName("CreateReservationRequest")
                 .WithDescription("Создает запрос на бронирование стола.")
                 .ProducesWithDescription(StatusCodes.Status200OK, "Запрос на бронирование успешно создан.")
-                .ProducesCommonErrors(conflictDescription: "Если номер клиента не соответствует формату.");
+                .ProducesCommonErrors(conflictDescription: "Если номер клиента не соответствует формату или имя клиента слишком длинное.");
 
             group.MapDelete("/{id:int}", DeleteReservationRequest)
                 .WithName("DeleteReservationRequest")
