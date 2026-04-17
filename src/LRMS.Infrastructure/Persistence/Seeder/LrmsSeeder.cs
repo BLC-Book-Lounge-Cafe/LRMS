@@ -14,6 +14,7 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
         AddSpaceState();
         AddBooks();
         AddTables();
+        AddMenu();
     }
 
     private void AddSpaceSettings()
@@ -135,6 +136,111 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
         };
 
         _dbContext.AddRange(tables);
+        _dbContext.SaveChanges();
+    }
+
+    private void AddMenu()
+    {
+        if (_dbContext.MenuItems.Any())
+            return;
+
+        var menuCategories = new List<MenuCategoryEntity>
+        {
+            new()
+            {
+                Id = 1,
+                Name = "Напитки"
+            },
+            new()
+            {
+                Id = 2,
+                Name = "Десерты"
+            },
+            new()
+            {
+                Id = 3,
+                Name = "Сэндвичи"
+            },
+        };
+
+        var menuItems = new List<MenuItemEntity>
+        {
+            new()
+            {
+                Name = "Эспрессо",
+                Price = 150,
+                CategoryId = 1
+            },
+            new()
+            {
+                Name = "Американо",
+                Price = 160,
+                CategoryId = 1
+            },
+            new()
+            {
+                Name = "Капучино",
+                Price = 170,
+                CategoryId = 1
+            },
+            new()
+            {
+                Name = "Латте",
+                Price = 180,
+                CategoryId = 1
+            },
+            new()
+            {
+                Name = "Раф",
+                Price = 190,
+                CategoryId = 1
+            },
+            new()
+            {
+                Name = "Чизкейк",
+                Price = 300,
+                CategoryId = 2
+            },
+            new()
+            {
+                Name = "Тирамису",
+                Price = 200,
+                CategoryId = 2
+            },
+            new()
+            {
+                Name = "Брауни",
+                Price = 190,
+                CategoryId = 2
+            },
+            new()
+            {
+                Name = "Макарон",
+                Price = 150,
+                CategoryId = 2
+            },
+            new()
+            {
+                Name = "Эклер",
+                Price = 290,
+                CategoryId = 2
+            },
+            new()
+            {
+                Name = "Сэндвич с курицей",
+                Price = 400,
+                CategoryId = 3
+            },
+            new()
+            {
+                Name = "Сэндвич с лососем",
+                Price = 350,
+                CategoryId = 3
+            }
+        };
+
+        _dbContext.MenuCategories.AddRange(menuCategories);
+        _dbContext.MenuItems.AddRange(menuItems);
         _dbContext.SaveChanges();
     }
 }

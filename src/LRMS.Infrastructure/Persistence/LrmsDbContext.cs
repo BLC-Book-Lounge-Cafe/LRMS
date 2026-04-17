@@ -22,10 +22,13 @@ public class LrmsDbContext : DbContext
     public virtual DbSet<SpaceStateEntity> SpaceStates { get; set; }
     public virtual DbSet<TableEntity> Tables { get; set; }
     public virtual DbSet<TableReservationEntity> TableReservations { get; set; }
+    public virtual DbSet<MenuCategoryEntity> MenuCategories { get; set; }
+    public virtual DbSet<MenuItemEntity> MenuItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         new BookReservationEntityTypeConfiguration().Configure(modelBuilder.Entity<BookReservationEntity>());
         new TableReservationEntityTypeConfiguration().Configure(modelBuilder.Entity<TableReservationEntity>());
+        new MenuItemEntityTypeConfiguration().Configure(modelBuilder.Entity<MenuItemEntity>());
     }
 }

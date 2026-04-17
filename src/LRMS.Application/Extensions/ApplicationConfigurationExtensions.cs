@@ -14,6 +14,7 @@ public static class ApplicationConfigurationExtensions
             services.AddScoped<ITableReservationService, TableReservationService>();
             services.AddScoped<ITableService, TableService>();
             services.AddScoped<IBookReservationService, BookReservationService>();
+            services.AddScoped<IMenuService, MenuService>();
             return services;
         }
     }

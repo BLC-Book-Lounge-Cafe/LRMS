@@ -30,6 +30,7 @@ public static class InfrastructureConfigurationExtensions
             services.AddScoped<ITableRepository, TableRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookReservationRepository, BookReservationRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             return services;
         }
