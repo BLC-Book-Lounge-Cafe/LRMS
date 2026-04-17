@@ -63,47 +63,31 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
             {
                 Name = "Война и мир",
                 Author = "Л. Толстой",
-                Description = "Для тех, кто пока не определился, что интереснее история или роман"
+                ImagePath = "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop"
             },
             new()
             {
                 Name = "Преступление и наказание",
                 Author = "Ф. Достоевский",
-                Description = "Для тех, кто право имеет"
+                ImagePath = "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop"
             },
             new()
             {
                 Name = "Игра престолов",
                 Author = "Дж. Мартин",
-                Description = "Для тех, кто ждет зиму"
+                ImagePath = "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
             },
             new()
             {
                 Name = "Гарри Поттер и философский камень",
                 Author = "Дж. Роулинг",
-                Description = "Для тех, кто не может найти романы в издании Росмэн"
+                ImagePath = "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=600&fit=crop"
             },
             new()
             {
                 Name = "Психология лжи",
                 Author = "П. Экман",
-                Description = "Для тех, кто узнает лжеца по выражению лица"
-            },
-            new()
-            {
-                Name = "Три товарища",
-                Author = "Э. Ремарк",
-                Description = "Для тех, кто знает, что три товарища - это не Эрих, Мария и Ремарк"
-            },
-            new()
-            {
-                Name = "Дюна",
-                Author = "Ф. Герберт"
-            },
-            new()
-            {
-                Name = "Мертвые души",
-                Author = "Н. Гоголь"
+                ImagePath = "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400&h=600&fit=crop"
             }
         };
 
@@ -121,37 +105,31 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
             new()
             {
                 SeatsCount = 2,
-                Description = "Ваш тихий угол на сегодня",
                 CreatedAt = DateTime.UtcNow
             },
             new()
             {
                 SeatsCount = 6,
-                Description = "Столик для дружной компании",
                 CreatedAt = DateTime.UtcNow
             },
             new()
             {
                 SeatsCount = 4,
-                Description = "Здесь можно заказать вкусный кофе",
                 CreatedAt = DateTime.UtcNow
             },
             new()
             {
                 SeatsCount = 2,
-                Description = "Ваш тихий угол",
                 CreatedAt = DateTime.UtcNow
             },
             new()
             {
                 SeatsCount = 7,
-                Description = "Столик рядом с баром",
                 CreatedAt = DateTime.UtcNow
             },
             new()
             {
                 SeatsCount = 2,
-                Description = "Столик с отличным WIFI",
                 CreatedAt = DateTime.UtcNow
             },
         };

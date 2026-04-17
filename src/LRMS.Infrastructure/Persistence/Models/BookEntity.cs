@@ -14,9 +14,6 @@ public class BookEntity
     [Column("author")]
     public required string Author { get; set; }
 
-    [Column("description")]
-    public string? Description { get; set; }
-
     [Column("image_path")]
-    public string? ImagePath { get; set; }
+    public string ImagePath { get; set; }
 }

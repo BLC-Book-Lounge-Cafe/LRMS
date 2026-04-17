@@ -1,7 +1,9 @@
+using LRMS.Application.Dto;
 using LRMS.Application.Extensions;
 using LRMS.Infrastructure.Extensions;
 using LRMS.Infrastructure.Persistence;
 using LRMS.Web.Extensions;
+using LRMS.Web.GraphQL.Query;
 using LRMS.Web.Middleware;
 using LRMS.Web.OpenApi;
 using Scalar.AspNetCore;
@@ -13,6 +15,15 @@ public partial class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddOpenApi(c => c.AddOperationTransformer(new ReturnCodeOpenApiOperationTransformer()));
+        builder.Services
+            .AddGraphQLServer()
+            .AddQueryType(q => q.Name("Query"))
+            .AddType<GetBooksQuery>()
+            .AddType<BookDto>()
+            .AddSorting()
+            .AddFiltering()
+            .AddPagingArguments();
+
         builder.Services.ConfigureOptions();
 
         if (!IsBuildTask())
@@ -26,6 +37,7 @@ public partial class Program
         app.MapOpenApi();
         app.MapScalarApiReference();
         app.MapApi();
+        app.MapGraphQL();
 
         if (!IsBuildTask())
             InitializeDatabase(app.Services);

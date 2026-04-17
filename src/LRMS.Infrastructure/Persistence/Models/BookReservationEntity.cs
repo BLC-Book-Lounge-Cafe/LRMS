@@ -17,11 +17,8 @@ public class BookReservationEntity
     [Column("book_id")]
     public long BookId { get; set; }
 
-    [Column("reservation_start_at")]
-    public DateTime ReservationStartAt { get; set; }
-
-    [Column("reservation_end_at")]
-    public DateTime ReservationEndAt { get; set; }
+    [Column("reservation_date")]
+    public DateTime ReservationDate { get; set; }
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
