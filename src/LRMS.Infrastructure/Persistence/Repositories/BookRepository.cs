@@ -105,17 +105,19 @@ public class BookRepository(LrmsDbContext dbContext) : IBookRepository
             return (IOrderedQueryable<BookEntity>)books;
         }
 
-        if (sortingSpecification.PropertyName.ToLower() == nameof(BookDto.Name))
+        if (sortingSpecification.PropertyName.Equals(nameof(BookDto.Name), StringComparison.OrdinalIgnoreCase))
         {
             return sortingSpecification.DescendingOrder
                 ? books.OrderByDescending(b => b.Name)
                 : books.OrderBy(b => b.Name);
         }
-        else
+        else if (sortingSpecification.PropertyName.Equals(nameof(BookDto.Author), StringComparison.OrdinalIgnoreCase))
         {
             return sortingSpecification.DescendingOrder
                 ? books.OrderByDescending(b => b.Author)
                 : books.OrderBy(b => b.Author);
         }
+
+        throw new Exception("Invalid property name for sorter.");
     }
 }
