@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.SpaceState;
+using LRMS.Application.SpaceState.Commands;
 using LRMS.Application.SpaceState.Requests;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,13 @@ public static class SpaceStateRouteGroup
                 .Produces<GetSpaceStateResponse>()
                 .ProducesCommonErrors();
 
+            group.MapPut("/", UpdateSpaceState)
+                .WithName("UpdateSpaceState")
+                .WithDescription("Обновляет уровень шума и описание текущего состояния пространства.")
+                .Produces(StatusCodes.Status200OK)
+                .ProducesCommonErrors(conflictDescription: "В случае, если уровень шума находится вне диапазона от 0 до 100, " +
+                    "либо описание пустое.");
+
             return endpointRouteBuilder;
         }
 
@@ -27,6 +35,15 @@ public static class SpaceStateRouteGroup
             CancellationToken ct = default)
         {
             return TypedResults.Ok(await service.GetSpaceStateAsync(ct));
+        }
+
+        private static async Task<IResult> UpdateSpaceState(
+            UpdateSpaceStateCommand command,
+            [FromServices] ISpaceStateService service,
+            CancellationToken ct = default)
+        {
+            await service.UpdateSpaceStateAsync(command, ct);
+            return TypedResults.Ok();
         }
     }
 }
