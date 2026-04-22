@@ -1,9 +1,9 @@
 ﻿using HotChocolate;
 using HotChocolate.Types;
 using HotChocolate.Types.Pagination;
-using LRMS.Application.Dto;
+using LRMS.Application.Books.Dto;
 using LRMS.Infrastructure.GraphQL;
-using LRMS.Infrastructure.Persistence.Repositories;
+using LRMS.Infrastructure.Persistence.Books;
 
 namespace LRMS.Web.GraphQL.Query;
 

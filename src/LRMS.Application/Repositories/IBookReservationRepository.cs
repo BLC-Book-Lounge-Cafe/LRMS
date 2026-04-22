@@ -1,8 +1,0 @@
-﻿using LRMS.Application.Dto;
-
-namespace LRMS.Application.Repositories;
-
-public interface IBookReservationRepository
-{
-    Task CreateBookReservation(BookReservationDto bookReservationDto, CancellationToken ct = default);
-}

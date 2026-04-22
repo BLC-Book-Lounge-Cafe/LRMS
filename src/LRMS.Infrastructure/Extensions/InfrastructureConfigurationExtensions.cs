@@ -1,7 +1,18 @@
-﻿using LRMS.Application.Repositories;
+﻿using LRMS.Application.BookReservations;
+using LRMS.Application.Menu;
+using LRMS.Application.ReservationRequests;
+using LRMS.Application.SpaceState;
+using LRMS.Application.TableReservations;
+using LRMS.Application.Tables;
 using LRMS.Infrastructure.Persistence;
-using LRMS.Infrastructure.Persistence.Repositories;
+using LRMS.Infrastructure.Persistence.BookReservations;
+using LRMS.Infrastructure.Persistence.Books;
+using LRMS.Infrastructure.Persistence.Menu;
+using LRMS.Infrastructure.Persistence.ReservationRequests;
 using LRMS.Infrastructure.Persistence.Seeder;
+using LRMS.Infrastructure.Persistence.SpaceState;
+using LRMS.Infrastructure.Persistence.TableReservations;
+using LRMS.Infrastructure.Persistence.Tables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

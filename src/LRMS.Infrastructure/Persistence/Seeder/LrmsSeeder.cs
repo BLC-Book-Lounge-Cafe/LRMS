@@ -1,5 +1,9 @@
-﻿using LRMS.Application.Dto;
-using LRMS.Infrastructure.Persistence.Models;
+﻿using LRMS.Application.SpaceState.Dto;
+using LRMS.Infrastructure.Persistence.Books;
+using LRMS.Infrastructure.Persistence.Menu;
+using LRMS.Infrastructure.Persistence.SpaceSettings;
+using LRMS.Infrastructure.Persistence.SpaceState;
+using LRMS.Infrastructure.Persistence.Tables;
 using System.Text.Json;
 
 namespace LRMS.Infrastructure.Persistence.Seeder;

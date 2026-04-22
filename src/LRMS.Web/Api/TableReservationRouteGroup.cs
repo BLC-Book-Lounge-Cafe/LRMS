@@ -1,6 +1,6 @@
-﻿using LRMS.Application.Dto;
-using LRMS.Application.Requests;
-using LRMS.Application.Services;
+﻿using LRMS.Application.TableReservations;
+using LRMS.Application.TableReservations.Dto;
+using LRMS.Application.TableReservations.Requests;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 

@@ -13,7 +13,7 @@ internal class ReturnCodeOpenApiOperationTransformer : IOpenApiOperationTransfor
         if (producesMetadata.Count == 0 || operation.Responses is null)
             return Task.CompletedTask;
 
-        foreach(var produces in producesMetadata)
+        foreach (var produces in producesMetadata)
         {
             if (string.IsNullOrEmpty(produces.Description))
                 continue;

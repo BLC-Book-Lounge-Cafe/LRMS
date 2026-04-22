@@ -1,5 +1,5 @@
-﻿using LRMS.Application.Dto;
-using LRMS.Infrastructure.Persistence.Models;
+﻿using LRMS.Application.Menu.Dto;
+using LRMS.Infrastructure.Persistence.Menu;
 using Riok.Mapperly.Abstractions;
 
 namespace LRMS.Infrastructure.Mappers;

@@ -1,6 +1,5 @@
-﻿using LRMS.Application.Queries;
-using LRMS.Application.Requests;
-using LRMS.Application.Services;
+﻿using LRMS.Application.Menu;
+using LRMS.Application.Menu.Requests;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 

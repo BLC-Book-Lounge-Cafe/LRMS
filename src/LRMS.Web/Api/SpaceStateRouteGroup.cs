@@ -1,5 +1,5 @@
-﻿using LRMS.Application.Requests;
-using LRMS.Application.Services;
+﻿using LRMS.Application.SpaceState;
+using LRMS.Application.SpaceState.Requests;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 

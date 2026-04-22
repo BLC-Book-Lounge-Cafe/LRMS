@@ -1,5 +1,5 @@
-﻿using LRMS.Application.Dto;
-using LRMS.Infrastructure.Persistence.Models;
+﻿using LRMS.Application.SpaceState.Dto;
+using LRMS.Infrastructure.Persistence.SpaceState;
 using Riok.Mapperly.Abstractions;
 
 [Mapper]

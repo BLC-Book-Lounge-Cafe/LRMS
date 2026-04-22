@@ -1,5 +1,5 @@
-﻿using LRMS.Application.Dto;
-using LRMS.Application.Services;
+﻿using LRMS.Application.BookReservations;
+using LRMS.Application.BookReservations.Dto;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
