@@ -16,7 +16,7 @@ public class GetBooksQuery
         int? take,
         FilteringSpecification? filter,
         SortingSpecification? sorter,
-        [Service] IBookRepository repository)
+        [Service] IBookGraphQLRepository repository)
     {
         var result = await repository.GetBooks(filter, new(skip, take), sorter);
         return new CollectionSegment<BookDto>([.. result.Collection], new(result.HasNextPage, result.HasPrevPage),

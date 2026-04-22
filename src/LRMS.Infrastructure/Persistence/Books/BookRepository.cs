@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.Books.Dto;
+using LRMS.Application.Exceptions;
 using LRMS.Infrastructure.GraphQL;
 using LRMS.Infrastructure.Mappers;
 using LRMS.Infrastructure.Util;
@@ -7,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace LRMS.Infrastructure.Persistence.Books;
 
-public class BookRepository(LrmsDbContext dbContext) : IBookRepository
+public class BookRepository(LrmsDbContext dbContext) : IBookGraphQLRepository
 {
     private readonly LrmsDbContext _dbContext = dbContext;
 
@@ -118,5 +119,27 @@ public class BookRepository(LrmsDbContext dbContext) : IBookRepository
         }
 
         throw new Exception("Invalid property name for sorter.");
+    }
+
+    public async Task CreateBook(string name, string author, string imageUrl, CancellationToken ct = default)
+    {
+        var book = new BookEntity
+        {
+            Name = name,
+            Author = author,
+            ImagePath = imageUrl
+        };
+
+        await _dbContext.AddAsync(book, ct);
+        await _dbContext.SaveChangesAsync(ct);
+    }
+
+    public async Task DeleteBook(long id, CancellationToken ct = default)
+    {
+        var book = await _dbContext.Books.FindAsync([id], ct)
+            ?? throw new EntityNotFoundException("Книга не найдена.");
+
+        _dbContext.Books.Remove(book);
+        await _dbContext.SaveChangesAsync(ct);
     }
 }

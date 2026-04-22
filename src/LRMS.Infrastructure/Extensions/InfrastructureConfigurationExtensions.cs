@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.BookReservations;
+using LRMS.Application.Books;
 using LRMS.Application.Menu;
 using LRMS.Application.ReservationRequests;
 using LRMS.Application.SpaceState;
@@ -39,7 +40,8 @@ public static class InfrastructureConfigurationExtensions
             services.AddScoped<ISpaceStateRepository, SpaceStateRepository>();
             services.AddScoped<ITableReservationRepository, TableReservationRepository>();
             services.AddScoped<ITableRepository, TableRepository>();
-            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookGraphQLRepository, BookRepository>();
+            services.AddScoped<IBookRepository>(p => p.GetRequiredService<IBookGraphQLRepository>());
             services.AddScoped<IBookReservationRepository, BookReservationRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
 
