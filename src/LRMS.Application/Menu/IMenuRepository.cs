@@ -5,4 +5,6 @@ namespace LRMS.Application.Menu;
 public interface IMenuRepository
 {
     Task<IReadOnlyCollection<MenuCategoryDto>> GetMenuItems(CancellationToken ct = default);
+    Task DeleteMenuCategory(int id, CancellationToken ct = default);
+    Task DeleteMenuItem(int id, CancellationToken ct = default);
 }

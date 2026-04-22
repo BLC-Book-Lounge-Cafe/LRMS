@@ -20,7 +20,7 @@ public static class SpaceStateRouteGroup
                 .Produces<GetSpaceStateResponse>()
                 .ProducesCommonErrors();
 
-            group.MapPut("/", UpdateSpaceState)
+            group.MapPatch("/", UpdateSpaceState)
                 .WithName("UpdateSpaceState")
                 .WithDescription("Обновляет уровень шума и описание текущего состояния пространства.")
                 .Produces(StatusCodes.Status200OK)
