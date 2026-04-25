@@ -1,4 +1,6 @@
-﻿namespace LRMS.Web.Extensions;
+﻿using LRMS.Infrastructure.Options;
+
+namespace LRMS.Web.Extensions;
 
 internal static class WebConfigurationExtensions
 {
@@ -6,6 +8,7 @@ internal static class WebConfigurationExtensions
     {
         public IServiceCollection ConfigureOptions()
         {
+            services.AddOptions<YandexMusicOptions>().BindConfiguration("YandexMusicOptions");
             return services;
         }
     }

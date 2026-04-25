@@ -5,6 +5,7 @@ using LRMS.Application.ReservationRequests;
 using LRMS.Application.SpaceState;
 using LRMS.Application.TableReservations;
 using LRMS.Application.Tables;
+using LRMS.Infrastructure.Music;
 using LRMS.Infrastructure.Persistence;
 using LRMS.Infrastructure.Persistence.BookReservations;
 using LRMS.Infrastructure.Persistence.Books;
@@ -44,6 +45,7 @@ public static class InfrastructureConfigurationExtensions
             services.AddScoped<IBookRepository>(p => p.GetRequiredService<IBookGraphQLRepository>());
             services.AddScoped<IBookReservationRepository, BookReservationRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddHostedService<MusicManager>();
 
             return services;
         }
