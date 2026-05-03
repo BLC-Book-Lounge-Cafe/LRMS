@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.Menu;
+using LRMS.Application.Menu.Dto;
 using LRMS.Application.Menu.Requests;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +21,23 @@ public static class MenuRouteGroup
                 .Produces<GetMenuResponse>()
                 .ProducesCommonErrors();
 
+            group.MapPost("/", CreateMenuCategory)
+                .WithName("CreateMenuCategory")
+                .WithDescription("Создает категорию меню с элементами.")
+                .Produces<MenuCategoryDto>(StatusCodes.Status201Created)
+                .ProducesCommonErrors();
+
+            group.MapPut("/", UpdateMenuCategory)
+                .WithName("UpdateMenuCategory")
+                .WithDescription("Обновляет категорию меню с элементами.")
+                .Produces(StatusCodes.Status200OK)
+                .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.");
+
             group.MapDelete("/category/{id:int}", DeleteMenuCategory)
                 .WithName("DeleteMenuCategory")
                 .WithDescription("Удаляет категорию меню.")
                 .Produces(StatusCodes.Status200OK)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти категорию меню.");
-
-            group.MapDelete("/item/{id:int}", DeleteMenuItem)
-                .WithName("DeleteMenuItem")
-                .WithDescription("Удаляет элемент меню.")
-                .Produces(StatusCodes.Status200OK)
-                .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти элемент меню.");
 
             return endpointRouteBuilder;
         }
@@ -52,13 +59,20 @@ public static class MenuRouteGroup
             return TypedResults.Ok();
         }
 
-        private static async Task<IResult> DeleteMenuItem(
-            [Description("Идентификатор элемента меню.")]
-            int id,
+        private static async Task<IResult> CreateMenuCategory(
+            MenuCategoryForCreateDto menuCategoryForCreateDto,
             [FromServices] IMenuService service,
             CancellationToken ct = default)
         {
-            await service.DeleteMenuItem(id, ct);
+            return TypedResults.Ok(await service.CreateMenuCategory(menuCategoryForCreateDto, ct));
+        }
+
+        private static async Task<IResult> UpdateMenuCategory(
+            MenuCategoryDto menuCategoryDto,
+            [FromServices] IMenuService service,
+            CancellationToken ct = default)
+        {
+            await service.UpdateMenuCategory(menuCategoryDto, ct);
             return TypedResults.Ok();
         }
     }

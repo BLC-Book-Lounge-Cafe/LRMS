@@ -12,4 +12,7 @@ public static partial class MenuMapper
 
     [MapperIgnoreSource(nameof(MenuItemEntity.CategoryId))]
     public static partial MenuItemDto ToMenuItemDto(MenuItemEntity entity);
+
+    [MapperIgnoreTarget(nameof(MenuItemEntity.CategoryId))]
+    public static partial MenuItemEntity ToEntity(MenuItemForCreateDto dto);
 }
