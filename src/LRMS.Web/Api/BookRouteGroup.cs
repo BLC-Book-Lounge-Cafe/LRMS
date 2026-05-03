@@ -18,7 +18,7 @@ public static class BookRouteGroup
                 .WithName("CreateBook")
                 .WithDescription("Создает книгу.")
                 .Produces(StatusCodes.Status200OK)
-                .ProducesCommonErrors(conflictDescription: "В случае если имя, автор или адрес картинки пустые.");
+                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.");
 
             group.MapDelete("/{id:long}", DeleteBook)
                 .WithName("DeleteBook")

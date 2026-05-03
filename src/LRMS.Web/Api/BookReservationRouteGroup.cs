@@ -16,9 +16,10 @@ internal static class BookReservationRouteGroup
             group.MapPost("/", CreateBookReservation)
                 .WithName("CreateBookReservation")
                 .WithDescription("Бронирует книгу.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status201Created)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не найдена книга по указанному идентификатору.",
-                    conflictDescription: "В случае, если данные для бронирования указаны неверно или книга уже была забронирована на указанную дату.");
+                    conflictDescription: "В случае, если книга уже была забронирована на указанную дату.",
+                    unprocessableErrorDescription: "В случае, если данные для бронирования указаны неверно.");
 
             return endpointRouteBuilder;
         }
@@ -29,7 +30,7 @@ internal static class BookReservationRouteGroup
             CancellationToken ct = default)
         {
             await service.CreateBookReservation(bookReservationDto, ct);
-            return TypedResults.Ok();
+            return TypedResults.Created();
         }
     }
 }

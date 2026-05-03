@@ -19,19 +19,20 @@ internal static class ReservationRequestRouteGroup
             group.MapPost("/", CreateReservationRequest)
                 .WithName("CreateReservationRequest")
                 .WithDescription("Создает запрос на бронирование стола.")
-                .ProducesWithDescription(StatusCodes.Status200OK, "Запрос на бронирование успешно создан.")
-                .ProducesCommonErrors(conflictDescription: "Если номер клиента не соответствует формату или имя клиента слишком длинное.");
+                .Produces(StatusCodes.Status201Created)
+                .ProducesCommonErrors(unprocessableErrorDescription:
+                    "В случае, если номер клиента не соответствует формату или имя клиента слишком длинное.");
 
             group.MapDelete("/{id:int}", DeleteReservationRequest)
                 .WithName("DeleteReservationRequest")
                 .WithDescription("Удаляет запрос на бронирование стола.")
-                .ProducesWithDescription(StatusCodes.Status200OK, "Запрос на бронирование успешно удален.")
-                .ProducesCommonErrors(notFoundDescription: "Если запрос на бронирование не найден.");
+                .Produces(StatusCodes.Status200OK)
+                .ProducesCommonErrors(notFoundDescription: "В случае, если запрос на бронирование не найден.");
 
             group.MapGet("/", GetReservationRequests)
                 .WithName("GetReservationRequests")
                 .WithDescription("Возвращает запросы на бронирование стола.")
-                .ProducesWithDescription<GetReservationRequestsResponse>(StatusCodes.Status200OK, "Запрос на бронирование успешно удален.")
+                .Produces<GetReservationRequestsResponse>(StatusCodes.Status200OK)
                 .ProducesCommonErrors();
 
             return endpointRouteBuilder;
@@ -43,7 +44,7 @@ internal static class ReservationRequestRouteGroup
             CancellationToken ct = default)
         {
             await service.CreateReservationRequest(command, ct);
-            return TypedResults.Ok();
+            return TypedResults.Created();
         }
 
         private static async Task<IResult> DeleteReservationRequest(

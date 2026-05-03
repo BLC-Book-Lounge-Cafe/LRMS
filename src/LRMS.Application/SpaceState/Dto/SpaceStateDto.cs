@@ -6,7 +6,7 @@
 public class SpaceStateDto
 {
     /// <summary>
-    ///     Уровень шума в процентах.
+    ///     Уровень шума.
     /// </summary>
     public NoiseLevelType NoiseLevel { get; set; }
 

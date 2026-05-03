@@ -10,13 +10,13 @@ public class BookService(IBookRepository repository) : IBookService
     public async Task CreateBook(CreateBookCommand command, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(command.Name))
-            throw new DomainException("Имя не может быть пустым.");
+            throw new DataValidationException("Имя не может быть пустым.");
 
         if (string.IsNullOrEmpty(command.Author))
-            throw new DomainException("Автор не может быть пустым.");
+            throw new DataValidationException("Автор не может быть пустым.");
 
         if (string.IsNullOrEmpty(command.ImageUrl))
-            throw new DomainException("Адрес картинки не может быть пустым.");
+            throw new DataValidationException("Адрес картинки не может быть пустым.");
 
         await _repository.CreateBook(command.Name, command.Author, command.ImageUrl, ct);
     }

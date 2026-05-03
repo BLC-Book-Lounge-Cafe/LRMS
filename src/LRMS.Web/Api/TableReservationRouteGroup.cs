@@ -17,9 +17,10 @@ public static class TableReservationRouteGroup
             group.MapPost("/", CreateTableReservation)
                 .WithName("CreateTableReservation")
                 .WithDescription("Бронирует стол.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status201Created)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не найден стол по указанному идентификатору.",
-                    conflictDescription: "В случае, если данные для бронирования указаны неверно или стол уже был забронирован на указанное время.");
+                    conflictDescription: "В случае, если стол уже был забронирован на указанное время.",
+                    unprocessableErrorDescription: "В случае, если данные для бронирования указаны неверно.");
 
             group.MapPost("/slots", GetTableReservationSlots)
                 .WithName("GetTableReservationSlots")
@@ -36,7 +37,7 @@ public static class TableReservationRouteGroup
             CancellationToken ct = default)
         {
             await service.CreateTableReservation(tableReservationDto, ct);
-            return TypedResults.Ok();
+            return TypedResults.Created();
         }
 
         private static async Task<IResult> GetTableReservationSlots(

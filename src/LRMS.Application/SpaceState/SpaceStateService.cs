@@ -16,10 +16,10 @@ public class SpaceStateService(ISpaceStateRepository repository) : ISpaceStateSe
     public async Task UpdateSpaceStateAsync(UpdateSpaceStateCommand command, CancellationToken ct = default)
     {
         if (command.NoiseLevel < 0 || command.NoiseLevel > 100)
-            throw new DomainException("Уровень шума должен быть в диапазоне от 0 до 100.");
+            throw new DataValidationException("Уровень шума должен быть в диапазоне от 0 до 100.");
 
         if (string.IsNullOrEmpty(command.Description))
-            throw new DomainException("Описание не может быть пустым.");
+            throw new DataValidationException("Описание не может быть пустым.");
 
         await _repository.UpdateSpaceStateAsync(command.NoiseLevel, command.Description, ct);
     }

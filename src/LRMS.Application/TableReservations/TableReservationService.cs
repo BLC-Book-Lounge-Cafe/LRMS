@@ -13,13 +13,13 @@ public partial class TableReservationService(ITableReservationRepository reposit
     public async Task CreateTableReservation(TableReservationDto tableReservationDto, CancellationToken ct = default)
     {
         if (tableReservationDto.CustomerName.Length > 255)
-            throw new DomainException("Имя клиента слишком длинное. Максимальное количество символов 255.");
+            throw new DataValidationException("Имя клиента слишком длинное. Максимальное количество символов 255.");
 
         if (!CustomerNumberRegex().IsMatch(tableReservationDto.CustomerPhone))
-            throw new DomainException("Номер клиента не соответствует формату.");
+            throw new DataValidationException("Номер клиента не соответствует формату.");
 
         if (tableReservationDto.StartTime > tableReservationDto.EndTime)
-            throw new DomainException("Начальное время бронирования не может превышать конечное.");
+            throw new DataValidationException("Начальное время бронирования не может превышать конечное.");
 
         await _repository.CreateTableReservation(tableReservationDto, ct);
     }
