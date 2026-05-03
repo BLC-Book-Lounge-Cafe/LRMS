@@ -121,7 +121,7 @@ public class BookRepository(LrmsDbContext dbContext) : IBookGraphQLRepository
         throw new Exception("Invalid property name for sorter.");
     }
 
-    public async Task CreateBook(string name, string author, string imageUrl, CancellationToken ct = default)
+    public async Task<BookDto> CreateBook(string name, string author, string imageUrl, CancellationToken ct = default)
     {
         var book = new BookEntity
         {
@@ -132,6 +132,7 @@ public class BookRepository(LrmsDbContext dbContext) : IBookGraphQLRepository
 
         await _dbContext.AddAsync(book, ct);
         await _dbContext.SaveChangesAsync(ct);
+        return BookMapper.ToDto(book);
     }
 
     public async Task DeleteBook(long id, CancellationToken ct = default)
@@ -140,6 +141,18 @@ public class BookRepository(LrmsDbContext dbContext) : IBookGraphQLRepository
             ?? throw new EntityNotFoundException("Книга не найдена.");
 
         _dbContext.Books.Remove(book);
+        await _dbContext.SaveChangesAsync(ct);
+    }
+
+    public async Task UpdateBook(long id, string name, string author, string imageUrl, CancellationToken ct = default)
+    {
+        var bookEntity = await _dbContext.Books.FindAsync([id], ct)
+            ?? throw new EntityNotFoundException("Книга не найдена.");
+
+        bookEntity.Name = name;
+        bookEntity.Author = author;
+        bookEntity.ImagePath = imageUrl;
+        _dbContext.Books.Update(bookEntity);
         await _dbContext.SaveChangesAsync(ct);
     }
 }

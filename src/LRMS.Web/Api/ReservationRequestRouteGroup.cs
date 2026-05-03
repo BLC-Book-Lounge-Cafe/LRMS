@@ -2,7 +2,6 @@
 using LRMS.Application.ReservationRequests.Commands;
 using LRMS.Application.ReservationRequests.Requests;
 using LRMS.Web.Extensions;
-using LRMS.Web.OpenApi;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 

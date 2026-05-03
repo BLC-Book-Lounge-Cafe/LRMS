@@ -1,5 +1,6 @@
 ﻿using LRMS.Application.Books;
 using LRMS.Application.Books.Commands;
+using LRMS.Application.Books.Dto;
 using LRMS.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
@@ -17,8 +18,15 @@ public static class BookRouteGroup
             group.MapPost("/", CreateBook)
                 .WithName("CreateBook")
                 .WithDescription("Создает книгу.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces<BookDto>(StatusCodes.Status201Created)
                 .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.");
+
+            group.MapPut("/{id:long}", UpdateBook)
+                .WithName("UpdateBook")
+                .WithDescription("Обновляет книгу.")
+                .Produces(StatusCodes.Status200OK)
+                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.",
+                    notFoundDescription: "В случае, если не удалось найти книгу.");
 
             group.MapDelete("/{id:long}", DeleteBook)
                 .WithName("DeleteBook")
@@ -34,7 +42,17 @@ public static class BookRouteGroup
             [FromServices] IBookService service,
             CancellationToken ct = default)
         {
-            await service.CreateBook(command, ct);
+            return TypedResults.Ok(await service.CreateBook(command, ct));
+        }
+
+        private static async Task<IResult> UpdateBook(
+            [Description("Идентификатор книги.")]
+            long id,
+            UpdateBookCommand command,
+            [FromServices] IBookService service,
+            CancellationToken ct = default)
+        {
+            await service.UpdateBook(id, command, ct);
             return TypedResults.Ok();
         }
 

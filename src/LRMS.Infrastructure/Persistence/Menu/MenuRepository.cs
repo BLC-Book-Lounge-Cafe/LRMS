@@ -78,7 +78,7 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
 
         List<MenuItemEntity> itemsToCreate = [];
         List<MenuItemEntity> itemsToUpdate = [];
-        foreach(var item in category.MenuItems)
+        foreach (var item in category.MenuItems)
         {
             if (!allItemEntities.TryGetValue(item.Id, out var itemEntity))
             {

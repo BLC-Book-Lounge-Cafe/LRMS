@@ -1,5 +1,6 @@
 ﻿using LRMS.Application.Exceptions;
 using LRMS.Application.SpaceState.Commands;
+using LRMS.Application.SpaceState.Dto;
 using LRMS.Application.SpaceState.Requests;
 
 namespace LRMS.Application.SpaceState;
@@ -15,8 +16,8 @@ public class SpaceStateService(ISpaceStateRepository repository) : ISpaceStateSe
 
     public async Task UpdateSpaceStateAsync(UpdateSpaceStateCommand command, CancellationToken ct = default)
     {
-        if (command.NoiseLevel < 0 || command.NoiseLevel > 100)
-            throw new DataValidationException("Уровень шума должен быть в диапазоне от 0 до 100.");
+        if (!Enum.IsDefined(typeof(NoiseLevelType), command.NoiseLevel))
+            throw new DataValidationException("Уровень шума должен быть в диапазоне от 0 до 5.");
 
         if (string.IsNullOrEmpty(command.Description))
             throw new DataValidationException("Описание не может быть пустым.");
