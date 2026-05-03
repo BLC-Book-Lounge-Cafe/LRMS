@@ -21,7 +21,7 @@ public static class EndpointBuilderExtensions
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status409Conflict,
                 conflictDescription ?? "В случае конфликта данных с текущем состоянием сервера.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status422UnprocessableEntity,
-                conflictDescription ?? "В случае нарушения доменных инвариантов в запросе.");
+                unprocessableErrorDescription ?? "В случае нарушения доменных инвариантов в запросе.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status500InternalServerError,
                 internalErrorDescription ?? "В случае внутренней ошибки сервера.");
             return builder;
