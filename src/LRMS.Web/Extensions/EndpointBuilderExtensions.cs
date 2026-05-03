@@ -11,14 +11,17 @@ public static class EndpointBuilderExtensions
         public RouteHandlerBuilder ProducesCommonErrors(
             string? conflictDescription = null,
             string? notFoundDescription = null,
-            string? internalErrorDescription = null)
+            string? internalErrorDescription = null,
+            string? unprocessableErrorDescription = null)
         {
             builder.ProducesWithDescription(StatusCodes.Status400BadRequest,
                 "В случае некорректно составленного запроса.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status404NotFound,
                 notFoundDescription ?? "В случае, если запрашиваемая сущность не найдена.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status409Conflict,
-                conflictDescription ?? "В случае нарушения доменных правил.");
+                conflictDescription ?? "В случае конфликта данных с текущем состоянием сервера.");
+            builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status422UnprocessableEntity,
+                conflictDescription ?? "В случае нарушения доменных инвариантов в запросе.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status500InternalServerError,
                 internalErrorDescription ?? "В случае внутренней ошибки сервера.");
             return builder;

@@ -12,6 +12,7 @@ internal class CommonExceptionHandler : IExceptionHandler
         {
             EntityNotFoundException => StatusCodes.Status404NotFound,
             DomainException => StatusCodes.Status409Conflict,
+            DataValidationException => StatusCodes.Status422UnprocessableEntity,
             _ => StatusCodes.Status500InternalServerError
         };
 

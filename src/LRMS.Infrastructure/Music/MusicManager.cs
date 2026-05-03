@@ -63,6 +63,7 @@ public class MusicManager : BackgroundService
         var dbContext = scope.ServiceProvider.GetRequiredService<LrmsDbContext>();
         var spaceState = dbContext.SpaceStates.First();
         spaceState.CurrentTrack = JsonSerializer.Serialize(currentTrack);
+        spaceState.UpdatedAt = DateTime.UtcNow;
         dbContext.Update(spaceState);
         dbContext.SaveChanges();
     }

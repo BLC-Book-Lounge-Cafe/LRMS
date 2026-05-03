@@ -46,7 +46,7 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
 
         var spaceState = new SpaceStateEntity
         {
-            NoiseLevel = 70,
+            NoiseLevel = (byte)NoiseLevelType.Lively,
             Description = "Идет дождь, в зале тепло и пахнет корицей. Идеальное время для чтения с чашкой какао.",
             CurrentTrack = JsonSerializer.Serialize(new CurrentTrackDto("Силуэт", ["Ваня Дмитриенко", "Аня Пересильд"],
                 "https://cdn-images.dzcdn.net/images/cover/dfc147ae4276f7aa692ae444f8c5300f/500x500-000000-80-0-0.jpg")),

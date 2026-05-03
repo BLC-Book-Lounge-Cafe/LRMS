@@ -14,7 +14,9 @@ public partial class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.Services.AddOpenApi(c => c.AddOperationTransformer(new ReturnCodeOpenApiOperationTransformer()));
+        builder.Services.AddOpenApi(c => c.AddOperationTransformer(new ReturnCodeOpenApiOperationTransformer())
+            .AddSchemaTransformer(new EnumSchemaTransformer(new(false), false)));
+
         builder.Services
             .AddGraphQLServer()
             .AddQueryType(q => q.Name("Query"))
