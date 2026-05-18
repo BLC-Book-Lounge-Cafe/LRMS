@@ -11,6 +11,7 @@ internal class CommonExceptionHandler : IExceptionHandler
         httpContext.Response.StatusCode = exception switch
         {
             EntityNotFoundException => StatusCodes.Status404NotFound,
+            BadRequestException => StatusCodes.Status400BadRequest,
             DomainException => StatusCodes.Status409Conflict,
             DataValidationException => StatusCodes.Status422UnprocessableEntity,
             _ => StatusCodes.Status500InternalServerError

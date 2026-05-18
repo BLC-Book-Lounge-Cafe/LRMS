@@ -20,19 +20,23 @@ public class MusicManager : BackgroundService
 
     public MusicManager(ILogger<MusicManager> logger, IServiceScopeFactory scopeFactory, IOptions<YandexMusicOptions> options)
     {
-        _logger = logger;
-        _scopeFactory = scopeFactory;
-        var client = new YandexMusicClient();
-        if (!client.Authorize(options.Value.Token))
+        try
         {
-            _logger.LogError("Не удалось авторизоваться.");
-            return;
-        }
+            _logger = logger;
+            _scopeFactory = scopeFactory;
+            var client = new YandexMusicClient();
+            if (!client.Authorize(options.Value.Token))
+            {
+                _logger.LogError("Не удалось авторизоваться.");
+                return;
+            }
 
-        _client = client;
-        _client.ConnectToYnison();
-        _client.Ynison.OnReceive += YnisonOnReceive;
-        _client.Ynison.Connect();
+            _client = client;
+            _client.ConnectToYnison();
+            _client.Ynison.OnReceive += YnisonOnReceive;
+            _client.Ynison.Connect();
+        }
+        catch { }
     }
 
     private void YnisonOnReceive(YnisonPlayer player, YnisonPlayer.ReceiveEventArgs args)

@@ -1,22 +1,22 @@
 ﻿using LRMS.Application.BookReservations;
 using LRMS.Application.Books;
 using LRMS.Application.Menu;
-using LRMS.Application.ReservationRequests;
 using LRMS.Application.SpaceState;
-using LRMS.Application.TableReservations;
 using LRMS.Application.Tables;
 using LRMS.Infrastructure.Music;
 using LRMS.Infrastructure.Persistence;
 using LRMS.Infrastructure.Persistence.BookReservations;
 using LRMS.Infrastructure.Persistence.Books;
 using LRMS.Infrastructure.Persistence.Menu;
-using LRMS.Infrastructure.Persistence.ReservationRequests;
 using LRMS.Infrastructure.Persistence.Seeder;
 using LRMS.Infrastructure.Persistence.SpaceState;
-using LRMS.Infrastructure.Persistence.TableReservations;
 using LRMS.Infrastructure.Persistence.Tables;
+using LRMS.Infrastructure.ReservationManagerApi.ReservationRequests;
+using LRMS.Infrastructure.ReservationManagerApi.Tables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
+using Yandex.Music.Api.API;
 
 namespace LRMS.Infrastructure.Extensions;
 
@@ -46,6 +46,16 @@ public static class InfrastructureConfigurationExtensions
             services.AddScoped<IBookReservationRepository, BookReservationRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddHostedService<MusicManager>();
+            services
+                .AddRefitClient<IReservationRequestApi>()
+                .AddRefitClient<ITableApi>()
+                .ConfigureHttpClient(client =>
+                {
+                    client.BaseAddress = new Uri("https://rms.gabrusenas.dev/");
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                    client.DefaultRequestHeaders.Add("Accept", "application/json");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer f50c3ffc-8c14-4818-b1d6-cdda39aae787");
+                });
 
             return services;
         }

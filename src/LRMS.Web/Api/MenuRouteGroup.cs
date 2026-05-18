@@ -25,19 +25,22 @@ public static class MenuRouteGroup
                 .WithName("CreateMenuCategory")
                 .WithDescription("Создает категорию меню с элементами.")
                 .Produces<MenuCategoryDto>(StatusCodes.Status201Created)
-                .ProducesCommonErrors();
+                .ProducesCommonErrors()
+                .RequireAuthorization();
 
             group.MapPut("/", UpdateMenuCategory)
                 .WithName("UpdateMenuCategory")
                 .WithDescription("Обновляет категорию меню с элементами.")
                 .Produces(StatusCodes.Status200OK)
-                .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.");
+                .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.")
+                .RequireAuthorization();
 
             group.MapDelete("/category/{id:int}", DeleteMenuCategory)
                 .WithName("DeleteMenuCategory")
                 .WithDescription("Удаляет категорию меню.")
                 .Produces(StatusCodes.Status200OK)
-                .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти категорию меню.");
+                .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти категорию меню.")
+                .RequireAuthorization();
 
             return endpointRouteBuilder;
         }

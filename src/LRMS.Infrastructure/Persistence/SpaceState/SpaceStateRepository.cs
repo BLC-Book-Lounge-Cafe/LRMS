@@ -1,13 +1,17 @@
 ﻿using LRMS.Application.SpaceState;
 using LRMS.Application.SpaceState.Dto;
+using LRMS.Infrastructure.ReservationManagerApi.ApiWrapper;
+using LRMS.Infrastructure.ReservationManagerApi.Tables;
+using LRMS.Infrastructure.ReservationManagerApi.Tables.Dto;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 namespace LRMS.Infrastructure.Persistence.SpaceState;
 
-public class SpaceStateRepository(LrmsDbContext dbContext) : ISpaceStateRepository
+public class SpaceStateRepository(LrmsDbContext dbContext, ITableApi tableApi) : ISpaceStateRepository
 {
     private readonly LrmsDbContext _dbContext = dbContext;
+    private readonly ITableApi _tableApi = tableApi;
 
     public async Task<SpaceStateDto> GetSpaceStateAsync(CancellationToken ct = default)
     {
@@ -32,12 +36,15 @@ public class SpaceStateRepository(LrmsDbContext dbContext) : ISpaceStateReposito
     {
         var allTablesCount = await _dbContext.Tables.CountAsync(ct);
         var now = DateTime.UtcNow;
-        var tableReservationsCount = await _dbContext.TableReservations
-            .Where(t => t.ReservationStartAt <= now && t.ReservationEndAt >= now)
-            .GroupBy(t => t.TableId)
-            .Select(t => t.Key)
-            .CountAsync(ct);
 
-        return (byte)(tableReservationsCount * 100 / allTablesCount);
+        var tableReservations = await RestApiWrapper.CallApi<TableReservationsResponse>(
+            _tableApi.GetTableReservations(null, DateTime.Now.ToString(), null, null, ct), ct);
+
+        var count = tableReservations.reservations
+            .GroupBy(t => t.table_id)
+            .Select(t => t.Key)
+            .Count();
+
+        return (byte)(count * 100 / allTablesCount);
     }
 }

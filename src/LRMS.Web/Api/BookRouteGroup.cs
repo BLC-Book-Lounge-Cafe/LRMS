@@ -19,20 +19,23 @@ public static class BookRouteGroup
                 .WithName("CreateBook")
                 .WithDescription("Создает книгу.")
                 .Produces<BookDto>(StatusCodes.Status201Created)
-                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.");
+                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.")
+                .RequireAuthorization();
 
             group.MapPut("/{id:long}", UpdateBook)
                 .WithName("UpdateBook")
                 .WithDescription("Обновляет книгу.")
                 .Produces(StatusCodes.Status200OK)
                 .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.",
-                    notFoundDescription: "В случае, если не удалось найти книгу.");
+                    notFoundDescription: "В случае, если не удалось найти книгу.")
+                .RequireAuthorization();
 
             group.MapDelete("/{id:long}", DeleteBook)
                 .WithName("DeleteBook")
                 .WithDescription("Удаляет книгу.")
                 .Produces(StatusCodes.Status200OK)
-                .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти книгу.");
+                .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти книгу.")
+                .RequireAuthorization();
 
             return endpointRouteBuilder;
         }

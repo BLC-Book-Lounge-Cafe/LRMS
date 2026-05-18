@@ -9,13 +9,14 @@ public static class EndpointBuilderExtensions
     extension(RouteHandlerBuilder builder)
     {
         public RouteHandlerBuilder ProducesCommonErrors(
+            string? badRequest = null,
             string? conflictDescription = null,
             string? notFoundDescription = null,
             string? internalErrorDescription = null,
             string? unprocessableErrorDescription = null)
         {
-            builder.ProducesWithDescription(StatusCodes.Status400BadRequest,
-                "В случае некорректно составленного запроса.");
+            builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status400BadRequest,
+                badRequest ?? "В случае некорректно составленного запроса.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status404NotFound,
                 notFoundDescription ?? "В случае, если запрашиваемая сущность не найдена.");
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status409Conflict,
@@ -39,6 +40,7 @@ public static class EndpointBuilderExtensions
             endpointRouteBuilder.MapBookReservationsApi();
             endpointRouteBuilder.MapMenuApi();
             endpointRouteBuilder.MapBooksApi();
+            endpointRouteBuilder.MapAdminLoginApi();
             return endpointRouteBuilder;
         }
     }
