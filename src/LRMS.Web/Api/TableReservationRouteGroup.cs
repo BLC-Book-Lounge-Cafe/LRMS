@@ -35,6 +35,7 @@ public static class TableReservationRouteGroup
                 .WithName("GetTableReservations")
                 .WithDescription("Возвращает список бронирований столов с пагинацией.")
                 .Produces<GetTableReservationsResponse>()
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не найден стол по указанному идентификатору.",
                     badRequest: "В случае, если дата или время не соответствует формату.")
                 .RequireAuthorization();
@@ -43,6 +44,7 @@ public static class TableReservationRouteGroup
                 .WithName("DeleteTableReservation")
                 .WithDescription("Возвращает список бронирований столов с пагинацией.")
                 .Produces(StatusCodes.Status204NoContent)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если бронирование стола не найдено.")
                 .RequireAuthorization();
 

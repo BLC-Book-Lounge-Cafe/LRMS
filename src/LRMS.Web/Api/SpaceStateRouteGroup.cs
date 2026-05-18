@@ -24,6 +24,7 @@ public static class SpaceStateRouteGroup
                 .WithName("UpdateSpaceState")
                 .WithDescription("Обновляет уровень шума и описание текущего состояния пространства.")
                 .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(unprocessableErrorDescription: "В случае, если уровень шума находится вне диапазона от 0 до 5, " +
                     "либо описание пустое.")
                 .RequireAuthorization();

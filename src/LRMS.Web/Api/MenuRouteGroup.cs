@@ -25,6 +25,7 @@ public static class MenuRouteGroup
                 .WithName("CreateMenuCategory")
                 .WithDescription("Создает категорию меню с элементами.")
                 .Produces<MenuCategoryDto>(StatusCodes.Status201Created)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors()
                 .RequireAuthorization();
 
@@ -32,6 +33,7 @@ public static class MenuRouteGroup
                 .WithName("UpdateMenuCategory")
                 .WithDescription("Обновляет категорию меню с элементами.")
                 .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.")
                 .RequireAuthorization();
 
@@ -39,6 +41,7 @@ public static class MenuRouteGroup
                 .WithName("DeleteMenuCategory")
                 .WithDescription("Удаляет категорию меню.")
                 .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти категорию меню.")
                 .RequireAuthorization();
 

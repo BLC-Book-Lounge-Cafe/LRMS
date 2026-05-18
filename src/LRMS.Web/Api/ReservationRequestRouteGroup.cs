@@ -28,6 +28,7 @@ internal static class ReservationRequestRouteGroup
                 .WithDescription("Возвращает список заявок на быстрое бронирование (имя + телефон) с пагинацией. " +
                     "Поддерживает фильтрацию по статусу.")
                 .Produces<GetReservationRequestsResponse>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(badRequest: "В случае, если дата создания указана в неверном формате.")
                 .RequireAuthorization();
 
@@ -35,6 +36,7 @@ internal static class ReservationRequestRouteGroup
                 .WithName("UpdateReservationRequest")
                 .WithDescription("Переводит заявку из статуса pending в confirmed или cancelled.")
                 .Produces<ReservationRequestDto>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если заявка на быстрое бронирование не найдена.",
                     conflictDescription: "В случае, если статус заявки уже изменен и недоступен для редактирования.")
                 .RequireAuthorization();

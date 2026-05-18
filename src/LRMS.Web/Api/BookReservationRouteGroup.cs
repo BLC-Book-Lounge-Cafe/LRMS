@@ -25,7 +25,8 @@ internal static class BookReservationRouteGroup
             group.MapGet("/", GetBookReservations)
                 .WithName("GetBookReservations")
                 .WithDescription("Возвращает список бронирований книг с пагинацией.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces<GetBookReservationsResponse>()
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не найдена книга по указанному идентификатору.",
                     badRequest: "В случае, если дата или номер телефона не соответствуют формату.")
                 .RequireAuthorization();
@@ -34,6 +35,7 @@ internal static class BookReservationRouteGroup
                 .WithName("DeleteBookReservation")
                 .WithDescription("Удаляет бронирование книги по его ID.")
                 .Produces(StatusCodes.Status204NoContent)
+                .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если бронь книги не найдена.")
                 .RequireAuthorization();
 
