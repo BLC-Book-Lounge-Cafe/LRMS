@@ -1,16 +1,15 @@
-﻿using LRMS.Application.BookReservations;
-using LRMS.Application.Books;
+﻿using LRMS.Application.Books;
 using LRMS.Application.Menu;
 using LRMS.Application.SpaceState;
 using LRMS.Application.Tables;
 using LRMS.Infrastructure.Music;
 using LRMS.Infrastructure.Persistence;
-using LRMS.Infrastructure.Persistence.BookReservations;
 using LRMS.Infrastructure.Persistence.Books;
 using LRMS.Infrastructure.Persistence.Menu;
 using LRMS.Infrastructure.Persistence.Seeder;
 using LRMS.Infrastructure.Persistence.SpaceState;
 using LRMS.Infrastructure.Persistence.Tables;
+using LRMS.Infrastructure.ReservationManagerApi.Books;
 using LRMS.Infrastructure.ReservationManagerApi.ReservationRequests;
 using LRMS.Infrastructure.ReservationManagerApi.Tables;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +48,7 @@ public static class InfrastructureConfigurationExtensions
             services
                 .AddRefitClient<IReservationRequestApi>()
                 .AddRefitClient<ITableApi>()
+                .AddRefitClient<IBookApi>()
                 .ConfigureHttpClient(client =>
                 {
                     client.BaseAddress = new Uri("https://rms.gabrusenas.dev/");

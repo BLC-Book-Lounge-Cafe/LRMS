@@ -1,4 +1,4 @@
-﻿namespace LRMS.Application.BookReservations.Dto;
+﻿namespace LRMS.Infrastructure.ReservationManagerApi.Books.Dto;
 
 /// <summary>
 ///     Данные для бронирования книги.
@@ -7,4 +7,4 @@
 /// <param name="Date">Дата бронирования.</param>
 /// <param name="CustomerName">Имя клиента.</param>
 /// <param name="CustomerPhone">Телефон клиента.</param>
-public record struct BookReservationDto(int BookId, DateTime Date, string CustomerName, string CustomerPhone);
+public record struct CreateBookReservationCommand(int BookId, DateTime Date, string CustomerName, string CustomerPhone);

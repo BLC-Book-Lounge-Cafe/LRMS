@@ -1,5 +1,4 @@
-﻿using LRMS.Infrastructure.Persistence.BookReservations;
-using LRMS.Infrastructure.Persistence.Books;
+﻿using LRMS.Infrastructure.Persistence.Books;
 using LRMS.Infrastructure.Persistence.Menu;
 using LRMS.Infrastructure.Persistence.SpaceSettings;
 using LRMS.Infrastructure.Persistence.SpaceState;
@@ -20,7 +19,6 @@ public class LrmsDbContext : DbContext
 
     public virtual DbSet<SpaceSettingsEntity> SpaceSettings { get; set; }
     public virtual DbSet<BookEntity> Books { get; set; }
-    public virtual DbSet<BookReservationEntity> BookReservations { get; set; }
     public virtual DbSet<SpaceStateEntity> SpaceStates { get; set; }
     public virtual DbSet<TableEntity> Tables { get; set; }
     public virtual DbSet<MenuCategoryEntity> MenuCategories { get; set; }
@@ -28,7 +26,6 @@ public class LrmsDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        new BookReservationEntityTypeConfiguration().Configure(modelBuilder.Entity<BookReservationEntity>());
         new MenuItemEntityTypeConfiguration().Configure(modelBuilder.Entity<MenuItemEntity>());
     }
 }

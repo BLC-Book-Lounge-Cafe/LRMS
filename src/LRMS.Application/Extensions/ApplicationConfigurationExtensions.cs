@@ -1,5 +1,4 @@
-﻿using LRMS.Application.BookReservations;
-using LRMS.Application.Books;
+﻿using LRMS.Application.Books;
 using LRMS.Application.Menu;
 using LRMS.Application.SpaceState;
 using LRMS.Application.Tables;
@@ -15,7 +14,6 @@ public static class ApplicationConfigurationExtensions
         {
             services.AddScoped<ISpaceStateService, SpaceStateService>();
             services.AddScoped<ITableService, TableService>();
-            services.AddScoped<IBookReservationService, BookReservationService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IBookService, BookService>();
             return services;

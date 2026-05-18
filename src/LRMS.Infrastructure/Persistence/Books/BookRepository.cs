@@ -2,15 +2,21 @@
 using LRMS.Application.Exceptions;
 using LRMS.Infrastructure.GraphQL;
 using LRMS.Infrastructure.Mappers;
+using LRMS.Infrastructure.ReservationManagerApi.ApiWrapper;
+using LRMS.Infrastructure.ReservationManagerApi.Books;
+using LRMS.Infrastructure.ReservationManagerApi.Books.Dto;
+using LRMS.Infrastructure.ReservationManagerApi.Tables;
+using LRMS.Infrastructure.ReservationManagerApi.Tables.Dto;
 using LRMS.Infrastructure.Util;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace LRMS.Infrastructure.Persistence.Books;
 
-public class BookRepository(LrmsDbContext dbContext) : IBookGraphQLRepository
+public class BookRepository(LrmsDbContext dbContext, IBookApi bookApi) : IBookGraphQLRepository
 {
     private readonly LrmsDbContext _dbContext = dbContext;
+    private readonly IBookApi _bookApi = bookApi;
 
     public async Task<OffsetPagingResponse<BookDto>> GetBooks(
         FilteringSpecification? filteringSpecification,
@@ -29,10 +35,9 @@ public class BookRepository(LrmsDbContext dbContext) : IBookGraphQLRepository
             .Take(pagingSpecification.Take ?? 10)
             .ToListAsync(ct);
 
-        var reservedBookIds = await _dbContext.BookReservations
-            .Where(b => b.ReservationDate == DateTime.UtcNow.Date)
-            .Select(b => b.Id)
-            .ToDictionaryAsync(b => b, ct);
+        var reservedBookIds = (await RestApiWrapper.CallApi<BookReservationsResponse>(
+            _bookApi.GetBookReservations(null, DateTime.Now.Date.ToString("yyyy-MM-dd"), null, null, ct), ct))
+            .reservations.ToDictionary(b => b.id);
 
         List<BookDto> bookDtos = [];
         foreach (var entity in entities)
