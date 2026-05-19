@@ -26,32 +26,36 @@ internal static class AdminLoginRouteGroup
             LoginRequest request,
             IConfiguration config)
         {
-            var adminPassword = config["AdminPassword"];
+            var adminsSection = config.GetSection("Admins");
+            var admins = adminsSection.GetChildren();
 
-            if (request.Password != adminPassword)
+            var admin = admins.FirstOrDefault(a =>
+                a["Login"]?.Equals(request.Login, StringComparison.OrdinalIgnoreCase) == true);
+
+            if (admin is null || admin["Password"] != request.Password)
                 return Results.Unauthorized();
 
-            var token = GenerateJwtToken(config);
-
+            var token = GenerateJwtToken(config, request.Login, admin["Role"] ?? "Admin");
             return Results.Ok(new { token });
         }
 
-        private static string GenerateJwtToken(IConfiguration config)
+        private static string GenerateJwtToken(IConfiguration config, string login, string role)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, "Admin"),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Name, login),
+                new Claim(ClaimTypes.Role, role),
+                new Claim("login_time", DateTime.UtcNow.ToString("o"))
             };
 
             var token = new JwtSecurityToken(
                 issuer: config["Jwt:Issuer"],
                 audience: config["Jwt:Audience"],
                 claims: claims,
-                expires: null, // Токен без срока действия
+                expires: null,
                 signingCredentials: credentials
             );
 
@@ -59,5 +63,10 @@ internal static class AdminLoginRouteGroup
         }
     }
 
-    public record LoginRequest(string Password);
+    /// <summary>
+    ///     Данные для входа в админку.
+    /// </summary>
+    /// <param name="Login">Логин.</param>
+    /// <param name="Password">Пароль.</param>
+    public record LoginRequest(string Login, string Password);
 }
