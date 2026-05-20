@@ -17,12 +17,16 @@ public static class EndpointBuilderExtensions
         {
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status400BadRequest,
                 badRequest ?? "В случае некорректно составленного запроса.");
-            builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status404NotFound,
-                notFoundDescription ?? "В случае, если запрашиваемая сущность не найдена.");
-            builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status409Conflict,
-                conflictDescription ?? "В случае конфликта данных с текущем состоянием сервера.");
-            builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status422UnprocessableEntity,
-                unprocessableErrorDescription ?? "В случае нарушения доменных инвариантов в запросе.");
+
+            if (notFoundDescription is not null)
+            builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status404NotFound,notFoundDescription);
+
+            if (conflictDescription is not null)
+                builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status409Conflict,conflictDescription);
+
+            if (unprocessableErrorDescription is not null)
+                builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status422UnprocessableEntity, unprocessableErrorDescription);
+
             builder.ProducesWithDescription<ErrorResponse>(StatusCodes.Status500InternalServerError,
                 internalErrorDescription ?? "В случае внутренней ошибки сервера.");
             return builder;

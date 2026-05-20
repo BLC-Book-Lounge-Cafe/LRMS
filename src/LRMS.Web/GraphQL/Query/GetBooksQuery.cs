@@ -8,6 +8,15 @@ namespace LRMS.Web.GraphQL.Query;
 [ExtendObjectType(OperationTypeNames.Query)]
 public class GetBooksQuery
 {
+    /// <summary>
+    ///     Возвращает список книг.
+    /// </summary>
+    /// <param name="skip">Количество книг, которое нужно пропустить.</param>
+    /// <param name="take">Количество книг, которое нужно получить.</param>
+    /// <param name="filter">Данные о фильтрах.</param>
+    /// <param name="sorter">Данные о сортировке.</param>
+    /// <param name="repository">Репозиторий для работы с книгами.</param>
+    /// <returns>Список книг.</returns>
     [UseOffsetPaging(IncludeTotalCount = true)]
     public async Task<CollectionSegment<BookDto>> GetBooksAsync(
         int? skip,
