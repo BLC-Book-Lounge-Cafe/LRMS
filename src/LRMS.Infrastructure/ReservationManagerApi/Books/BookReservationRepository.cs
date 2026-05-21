@@ -36,7 +36,7 @@ public class BookReservationRepository(LrmsDbContext dbContext, IBookApi bookApi
         int? pageSize,
         CancellationToken ct = default)
     {
-        if (!await _dbContext.Books.AnyAsync(t => t.Id == bookId, ct))
+        if (bookId is not null && !await _dbContext.Books.AnyAsync(t => t.Id == bookId, ct))
             throw new EntityNotFoundException("Не найдена книга.");
 
         var response = await RestApiWrapper.CallApi<BookReservationsResponse>(
