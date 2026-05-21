@@ -25,7 +25,7 @@ public class ReservationRequestRepository(
         return ReservationRequestMapper.ToResponse(response);
     }
 
-    public async Task<ReservationRequestDto> UpdateReservationRequest(int id, UpdateReservationRequestCommand command, CancellationToken ct = default)
+    public async Task<ReservationRequestDto> UpdateReservationRequest(long id, UpdateReservationRequestCommand command, CancellationToken ct = default)
     {
         var response = await RestApiWrapper.CallApi<QuickReservationModel>(
             _reservationRequestApi.UpdateReservationRequest(id, ReservationRequestMapper.ToQuickDto(command), ct), ct);

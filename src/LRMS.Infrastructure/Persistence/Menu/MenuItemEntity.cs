@@ -6,13 +6,13 @@ namespace LRMS.Infrastructure.Persistence.Menu;
 public class MenuItemEntity
 {
     [Column("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [Column("name")]
     public required string Name { get; set; }
 
     [Column("category_id")]
-    public int CategoryId { get; set; }
+    public long CategoryId { get; set; }
 
     [Column("price")]
     public double Price { get; set; }

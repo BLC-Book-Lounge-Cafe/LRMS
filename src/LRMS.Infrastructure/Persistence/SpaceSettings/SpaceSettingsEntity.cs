@@ -6,7 +6,7 @@ namespace LRMS.Infrastructure.Persistence.SpaceSettings;
 public class SpaceSettingsEntity
 {
     [Column("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [Column("start_time")]
     public DateTime StartTime { get; set; }

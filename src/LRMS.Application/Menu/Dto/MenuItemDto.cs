@@ -6,4 +6,4 @@
 /// <param name="Id">Идентификатор.</param>
 /// <param name="Name">Название.</param>
 /// <param name="Price">Цена.</param>
-public record struct MenuItemDto(int Id, string Name, double Price);
+public record struct MenuItemDto(long Id, string Name, double Price);

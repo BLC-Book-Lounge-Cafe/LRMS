@@ -6,7 +6,7 @@ namespace LRMS.Infrastructure.Persistence.SpaceState;
 public class SpaceStateEntity
 {
     [Column("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [Column("noise_level")]
     public byte NoiseLevel { get; set; }

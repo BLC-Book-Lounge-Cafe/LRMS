@@ -40,9 +40,9 @@ public static class TableReservationRouteGroup
                     badRequest: "В случае, если дата или время не соответствует формату.")
                 .RequireAuthorization();
 
-            group.MapDelete("/{id:int}", DeleteTableReservation)
+            group.MapDelete("/{id:long}", DeleteTableReservation)
                 .WithName("DeleteTableReservation")
-                .WithDescription("Возвращает список бронирований столов с пагинацией.")
+                .WithDescription("Удаляет бронирование стола.")
                 .Produces(StatusCodes.Status204NoContent)
                 .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если бронирование стола не найдено.")
@@ -71,7 +71,7 @@ public static class TableReservationRouteGroup
         private static async Task<IResult> GetTableReservations(
             [FromServices] ITableReservationRepository service,
             [Description("Фильтр по ID стола.")]
-            int? tableId,
+            long? tableId,
             [Description("Фильтр по дате (UTC, ISO-8601). Принимает либо date YYYY-MM-DD — возвращает брони, активные в указанный день; либо date-time — возвращает брони, активные в указанный момент времени.")]
             string? activeAt,
             [Description("Номер страницы.")]
@@ -86,7 +86,7 @@ public static class TableReservationRouteGroup
         private static async Task<IResult> DeleteTableReservation(
             [FromServices] ITableReservationRepository service,
             [Description("Идентификатор брони стола.")]
-            int id,
+            long id,
             CancellationToken ct = default)
         {
             await service.DeleteTableReservation(id, ct);

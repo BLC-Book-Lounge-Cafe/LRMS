@@ -37,10 +37,10 @@ public static class MenuRouteGroup
                 .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.")
                 .RequireAuthorization();
 
-            group.MapDelete("/category/{id:int}", DeleteMenuCategory)
+            group.MapDelete("/category/{id:long}", DeleteMenuCategory)
                 .WithName("DeleteMenuCategory")
                 .WithDescription("Удаляет категорию меню.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status204NoContent)
                 .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти категорию меню.")
                 .RequireAuthorization();
@@ -57,12 +57,12 @@ public static class MenuRouteGroup
 
         private static async Task<IResult> DeleteMenuCategory(
             [Description("Идентификатор категории меню.")]
-            int id,
+            long id,
             [FromServices] IMenuService service,
             CancellationToken ct = default)
         {
             await service.DeleteMenuCategory(id, ct);
-            return TypedResults.Ok();
+            return TypedResults.NoContent();
         }
 
         private static async Task<IResult> CreateMenuCategory(

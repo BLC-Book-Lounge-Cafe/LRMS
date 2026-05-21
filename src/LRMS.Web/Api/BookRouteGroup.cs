@@ -35,7 +35,7 @@ public static class BookRouteGroup
             group.MapDelete("/{id:long}", DeleteBook)
                 .WithName("DeleteBook")
                 .WithDescription("Удаляет книгу.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status204NoContent)
                 .Produces(StatusCodes.Status401Unauthorized)
                 .ProducesCommonErrors(notFoundDescription: "В случае, если не удалось найти книгу.")
                 .RequireAuthorization();
@@ -69,7 +69,7 @@ public static class BookRouteGroup
             CancellationToken ct = default)
         {
             await service.DeleteBook(id, ct);
-            return TypedResults.Ok();
+            return TypedResults.NoContent();
         }
     }
 }

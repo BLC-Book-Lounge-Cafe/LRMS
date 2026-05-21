@@ -8,4 +8,4 @@
 /// <param name="Date">Дата бронирования.</param>
 /// <param name="CustomerName">Имя клиента.</param>
 /// <param name="CustomerPhone">Телефон клиента.</param>
-public record struct BookReservationDto(int Id, int BookId, DateTime Date, string CustomerName, string CustomerPhone);
+public record struct BookReservationDto(long Id, long BookId, DateTime Date, string CustomerName, string CustomerPhone);

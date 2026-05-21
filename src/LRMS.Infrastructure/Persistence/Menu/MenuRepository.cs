@@ -37,7 +37,7 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
         };
     }
 
-    public async Task DeleteMenuCategory(int id, CancellationToken ct = default)
+    public async Task DeleteMenuCategory(long id, CancellationToken ct = default)
     {
         var category = await _dbContext.MenuCategories.FindAsync([id], ct)
             ?? throw new EntityNotFoundException("Категория меню не найдена.");

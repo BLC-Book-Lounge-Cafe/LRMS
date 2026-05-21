@@ -13,5 +13,5 @@ public interface IReservationRequestApi
         [Refit.Query] int? pageNumber, [Refit.Query] int? pageSize, CancellationToken ct = default);
 
     [Put("/api/v1/quicks/{id}/status")]
-    Task<HttpResponseMessage> UpdateReservationRequest(int id, [Body] UpdateQuickReservationDto dto, CancellationToken ct = default);
+    Task<HttpResponseMessage> UpdateReservationRequest(long id, [Body] UpdateQuickReservationDto dto, CancellationToken ct = default);
 }

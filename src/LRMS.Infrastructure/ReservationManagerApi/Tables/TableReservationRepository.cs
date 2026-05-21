@@ -14,7 +14,7 @@ public class TableReservationRepository(LrmsDbContext dbContext, ITableApi table
     private readonly LrmsDbContext _dbContext = dbContext;
     private readonly ITableApi _tableApi = tableApi;
 
-    public async Task<IReadOnlyCollection<ReservationSlotDto>> GetSlots(int tableId, DateTime date, CancellationToken ct = default)
+    public async Task<IReadOnlyCollection<ReservationSlotDto>> GetSlots(long tableId, DateTime date, CancellationToken ct = default)
     {
         await CheckTableExists(tableId, ct);
 
@@ -35,14 +35,14 @@ public class TableReservationRepository(LrmsDbContext dbContext, ITableApi table
             _tableApi.CreateTableReservation(dto, ct), ct);
     }
 
-    private async Task CheckTableExists(int id, CancellationToken ct)
+    private async Task CheckTableExists(long id, CancellationToken ct)
     {
         if (!await _dbContext.Tables.AnyAsync(t => t.Id == id, ct))
             throw new EntityNotFoundException("Не найден стол.");
     }
 
     public async Task<GetTableReservationsResponse> GetTableReservations(
-        int? tableId,
+        long? tableId,
         string? activeAt,
         int? pageNumber,
         int? pageSize,
@@ -57,7 +57,7 @@ public class TableReservationRepository(LrmsDbContext dbContext, ITableApi table
         return TableReservationMapper.ToResponse(response);
     }
 
-    public async Task DeleteTableReservation(int id, CancellationToken ct = default)
+    public async Task DeleteTableReservation(long id, CancellationToken ct = default)
     {
         await RestApiWrapper.CallApi(_tableApi.DeleteTableReservation(id, ct), ct);
     }

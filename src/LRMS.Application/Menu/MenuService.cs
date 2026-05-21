@@ -12,7 +12,7 @@ public class MenuService(IMenuRepository repository) : IMenuService
         return await _repository.CreateMenuCategory(category, ct);
     }
 
-    public async Task DeleteMenuCategory(int id, CancellationToken ct = default)
+    public async Task DeleteMenuCategory(long id, CancellationToken ct = default)
     {
         await _repository.DeleteMenuCategory(id, ct);
     }

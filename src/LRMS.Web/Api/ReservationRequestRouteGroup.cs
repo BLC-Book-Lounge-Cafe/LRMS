@@ -32,7 +32,7 @@ internal static class ReservationRequestRouteGroup
                 .ProducesCommonErrors(badRequest: "В случае, если дата создания указана в неверном формате.")
                 .RequireAuthorization();
 
-            group.MapPut("/{id:int}", UpdateReservationRequest)
+            group.MapPut("/{id:long}", UpdateReservationRequest)
                 .WithName("UpdateReservationRequest")
                 .WithDescription("Переводит заявку из статуса pending в confirmed или cancelled.")
                 .Produces<ReservationRequestDto>(StatusCodes.Status200OK)
@@ -71,7 +71,7 @@ internal static class ReservationRequestRouteGroup
         private static async Task<IResult> UpdateReservationRequest(
             [FromServices] IReservationRequestRepository service,
             [Description("Идентификатор заявки на бронирование.")]
-            int id,
+            long id,
             UpdateReservationRequestCommand command,
             CancellationToken ct = default)
         {

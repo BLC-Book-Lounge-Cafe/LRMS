@@ -6,7 +6,7 @@ namespace LRMS.Application.Menu;
 public interface IMenuService
 {
     Task<GetMenuResponse> GetMenu(CancellationToken ct = default);
-    Task DeleteMenuCategory(int id, CancellationToken ct = default);
+    Task DeleteMenuCategory(long id, CancellationToken ct = default);
     Task<MenuCategoryDto> CreateMenuCategory(MenuCategoryForCreateDto category, CancellationToken ct = default);
     Task UpdateMenuCategory(MenuCategoryDto category, CancellationToken ct = default);
 }

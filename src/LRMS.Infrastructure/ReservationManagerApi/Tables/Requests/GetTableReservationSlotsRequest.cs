@@ -5,4 +5,4 @@
 /// </summary>
 /// <param name="TableId">Идентификатор стола.</param>
 /// <param name="Date">Дата бронирования.</param>
-public record struct GetTableReservationSlotsRequest(int TableId, DateTime Date);
+public record struct GetTableReservationSlotsRequest(long TableId, DateTime Date);

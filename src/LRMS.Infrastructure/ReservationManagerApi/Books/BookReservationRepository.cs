@@ -24,13 +24,13 @@ public class BookReservationRepository(LrmsDbContext dbContext, IBookApi bookApi
            _bookApi.CreateBookReservation(BookReservationMapper.ToDto(bookReservationDto), ct), ct);
     }
 
-    public async Task DeleteBookReservation(int id, CancellationToken ct = default)
+    public async Task DeleteBookReservation(long id, CancellationToken ct = default)
     {
         await RestApiWrapper.CallApi(_bookApi.DeleteBookReservation(id, ct), ct);
     }
 
     public async Task<GetBookReservationsResponse> GetBookReservations(
-        int? bookId,
+        long? bookId,
         DateTime? date,
         int? pageNumber,
         int? pageSize,

@@ -31,7 +31,7 @@ internal static class BookReservationRouteGroup
                     badRequest: "В случае, если дата или номер телефона не соответствуют формату.")
                 .RequireAuthorization();
 
-            group.MapDelete("/", DeleteBookReservation)
+            group.MapDelete("/{id:long}", DeleteBookReservation)
                 .WithName("DeleteBookReservation")
                 .WithDescription("Удаляет бронирование книги по его ID.")
                 .Produces(StatusCodes.Status204NoContent)
@@ -54,7 +54,7 @@ internal static class BookReservationRouteGroup
         private static async Task<IResult> GetBookReservations(
             [FromServices] IBookReservationRepository service,
             [Description("Фильтр по ID книги.")]
-            int? bookId,
+            long? bookId,
             [Description("Фильтр по дате бронирования.")]
             DateTime? date,
             [Description("Номер страницы.")]

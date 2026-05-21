@@ -6,7 +6,7 @@ namespace LRMS.Infrastructure.Persistence.Menu;
 public class MenuCategoryEntity
 {
     [Column("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [Column("name")]
     public required string Name { get; set; }
