@@ -22,11 +22,12 @@ public class SpaceStateRepository(LrmsDbContext dbContext, ITableApi tableApi) :
         return spaceStateDto;
     }
 
-    public async Task UpdateSpaceStateAsync(byte noiseLevel, string description, CancellationToken ct = default)
+    public async Task UpdateSpaceStateAsync(byte noiseLevel, string? description, CancellationToken ct = default)
     {
         var spaceState = await _dbContext.SpaceStates.FirstAsync(ct);
         spaceState.NoiseLevel = noiseLevel;
-        spaceState.Description = description;
+        if (!string.IsNullOrEmpty(description))
+            spaceState.Description = description;
         spaceState.UpdatedAt = DateTime.UtcNow;
         _dbContext.SpaceStates.Update(spaceState);
         await _dbContext.SaveChangesAsync(ct);

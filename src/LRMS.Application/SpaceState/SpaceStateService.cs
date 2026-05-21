@@ -19,9 +19,6 @@ public class SpaceStateService(ISpaceStateRepository repository) : ISpaceStateSe
         if (!Enum.IsDefined(typeof(NoiseLevelType), command.NoiseLevel))
             throw new DataValidationException("Уровень шума должен быть в диапазоне от 0 до 5.");
 
-        if (string.IsNullOrEmpty(command.Description))
-            throw new DataValidationException("Описание не может быть пустым.");
-
         await _repository.UpdateSpaceStateAsync(command.NoiseLevel, command.Description, ct);
     }
 }

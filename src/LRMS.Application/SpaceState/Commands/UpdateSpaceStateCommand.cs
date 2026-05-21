@@ -5,4 +5,4 @@
 /// </summary>
 /// <param name="NoiseLevel">Уровень шума.</param>
 /// <param name="Description">Описание.</param>
-public record struct UpdateSpaceStateCommand(byte NoiseLevel, string Description);
+public record struct UpdateSpaceStateCommand(byte NoiseLevel, string? Description);
