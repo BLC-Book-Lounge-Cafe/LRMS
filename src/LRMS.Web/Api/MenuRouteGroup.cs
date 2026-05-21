@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.Menu;
+using LRMS.Application.Menu.Commands;
 using LRMS.Application.Menu.Dto;
 using LRMS.Application.Menu.Requests;
 using LRMS.Web.Extensions;
@@ -21,20 +22,23 @@ public static class MenuRouteGroup
                 .Produces<GetMenuResponse>()
                 .ProducesCommonErrors();
 
-            group.MapPost("/", CreateMenuCategory)
+            group.MapPost("/category", CreateMenuCategory)
                 .WithName("CreateMenuCategory")
                 .WithDescription("Создает категорию меню с элементами.")
                 .Produces<MenuCategoryDto>(StatusCodes.Status201Created)
                 .Produces(StatusCodes.Status401Unauthorized)
-                .ProducesCommonErrors()
+                .ProducesCommonErrors(unprocessableErrorDescription: "В случае, если название категории меню или " +
+                    "элемента категории меню пустое или длина превышает 255 символов, либо цена элемента категории меню ниже 0.")
                 .RequireAuthorization();
 
-            group.MapPut("/", UpdateMenuCategory)
+            group.MapPut("/category/{id:long}", UpdateMenuCategory)
                 .WithName("UpdateMenuCategory")
                 .WithDescription("Обновляет категорию меню с элементами.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces<MenuCategoryDto>()
                 .Produces(StatusCodes.Status401Unauthorized)
-                .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.")
+                .ProducesCommonErrors(notFoundDescription: "В случае, если категория меню не найдена.",
+                    unprocessableErrorDescription: "В случае, если название категории меню или " +
+                    "элемента категории меню пустое или длина превышает 255 символов, либо цена элемента категории меню ниже 0.")
                 .RequireAuthorization();
 
             group.MapDelete("/category/{id:long}", DeleteMenuCategory)
@@ -66,7 +70,7 @@ public static class MenuRouteGroup
         }
 
         private static async Task<IResult> CreateMenuCategory(
-            MenuCategoryForCreateDto menuCategoryForCreateDto,
+            CreateMenuCategoryCommand menuCategoryForCreateDto,
             [FromServices] IMenuService service,
             CancellationToken ct = default)
         {
@@ -74,11 +78,13 @@ public static class MenuRouteGroup
         }
 
         private static async Task<IResult> UpdateMenuCategory(
-            MenuCategoryDto menuCategoryDto,
+            [Description("Идентификатор категории меню.")]
+            long id,
+            UpdateMenuCategoryCommand menuCategoryDto,
             [FromServices] IMenuService service,
             CancellationToken ct = default)
         {
-            await service.UpdateMenuCategory(menuCategoryDto, ct);
+            await service.UpdateMenuCategory(id, menuCategoryDto, ct);
             return TypedResults.Ok();
         }
     }

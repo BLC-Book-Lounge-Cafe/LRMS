@@ -20,15 +20,17 @@ public static class BookRouteGroup
                 .WithDescription("Создает книгу.")
                 .Produces<BookDto>(StatusCodes.Status201Created)
                 .Produces(StatusCodes.Status401Unauthorized)
-                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.")
+                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые, " +
+                    "имя или автор больше 255 символов, либо адрес картинки не соответствует формату URL.")
                 .RequireAuthorization();
 
             group.MapPut("/{id:long}", UpdateBook)
                 .WithName("UpdateBook")
                 .WithDescription("Обновляет книгу.")
-                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status204NoContent)
                 .Produces(StatusCodes.Status401Unauthorized)
-                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые.",
+                .ProducesCommonErrors(unprocessableErrorDescription: "В случае если имя, автор или адрес картинки пустые, " +
+                    "имя или автор больше 255 символов, либо адрес картинки не соответствует формату URL.",
                     notFoundDescription: "В случае, если не удалось найти книгу.")
                 .RequireAuthorization();
 
@@ -59,7 +61,7 @@ public static class BookRouteGroup
             CancellationToken ct = default)
         {
             await service.UpdateBook(id, command, ct);
-            return TypedResults.Ok();
+            return TypedResults.NoContent();
         }
 
         private static async Task<IResult> DeleteBook(

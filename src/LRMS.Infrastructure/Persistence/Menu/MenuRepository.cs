@@ -1,5 +1,6 @@
 ﻿using LRMS.Application.Exceptions;
 using LRMS.Application.Menu;
+using LRMS.Application.Menu.Commands;
 using LRMS.Application.Menu.Dto;
 using LRMS.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
 {
     private readonly LrmsDbContext _dbContext = dbContext;
 
-    public async Task<MenuCategoryDto> CreateMenuCategory(MenuCategoryForCreateDto category, CancellationToken ct = default)
+    public async Task<MenuCategoryDto> CreateMenuCategory(CreateMenuCategoryCommand category, CancellationToken ct = default)
     {
         var categoryEntity = new MenuCategoryEntity
         {
@@ -64,21 +65,21 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
         return result;
     }
 
-    public async Task UpdateMenuCategory(MenuCategoryDto category, CancellationToken ct = default)
+    public async Task<MenuCategoryDto> UpdateMenuCategory(long id, UpdateMenuCategoryCommand command, CancellationToken ct = default)
     {
-        var categoryEntity = await _dbContext.MenuCategories.FindAsync([category.Id], ct)
+        var categoryEntity = await _dbContext.MenuCategories.FindAsync([id], ct)
             ?? throw new EntityNotFoundException("Не удалось найти категорию меню.");
 
-        categoryEntity.Name = category.Name;
+        categoryEntity.Name = command.Name;
         _dbContext.MenuCategories.Update(categoryEntity);
 
         var allItemEntities = await _dbContext.MenuItems
-            .Where(i => i.CategoryId == category.Id)
+            .Where(i => i.CategoryId == id)
             .ToDictionaryAsync(i => i.Id, ct);
 
         List<MenuItemEntity> itemsToCreate = [];
         List<MenuItemEntity> itemsToUpdate = [];
-        foreach (var item in category.MenuItems)
+        foreach (var item in command.MenuItems)
         {
             if (!allItemEntities.TryGetValue(item.Id, out var itemEntity))
             {
@@ -86,7 +87,7 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
                 {
                     Name = item.Name,
                     Price = item.Price,
-                    CategoryId = category.Id
+                    CategoryId = id
                 };
                 itemsToCreate.Add(itemEntity);
                 continue;
@@ -102,5 +103,13 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
         _dbContext.MenuItems.UpdateRange(itemsToUpdate);
         _dbContext.MenuItems.RemoveRange(allItemEntities.Values);
         await _dbContext.SaveChangesAsync(ct);
+
+        return new()
+        {
+            Id = categoryEntity.Id,
+            Name = categoryEntity.Name,
+            MenuItems = [.. (await _dbContext.MenuItems.Where(i => i.CategoryId == categoryEntity.Id).ToListAsync(ct))
+                .Select(MenuMapper.ToMenuItemDto)]
+        };
     }
 }

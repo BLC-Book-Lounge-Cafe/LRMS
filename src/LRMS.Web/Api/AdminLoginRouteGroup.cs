@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using LRMS.Web.OpenApi;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -15,9 +16,10 @@ internal static class AdminLoginRouteGroup
 
             group.MapPost("/login", Login)
                 .WithName("Login")
-                .WithDescription("Вход для админа.")
-                .Produces(StatusCodes.Status200OK)
-                .Produces(StatusCodes.Status401Unauthorized);
+                .WithDescription("Вход для администратора.")
+                .Produces<LoginResult>()
+                .ProducesWithDescription(StatusCodes.Status401Unauthorized,
+                    "В случае, если не найден логин или не совпадает пароль.");
 
             return endpointRouteBuilder;
         }
@@ -36,7 +38,7 @@ internal static class AdminLoginRouteGroup
                 return Results.Unauthorized();
 
             var token = GenerateJwtToken(config, request.Login, admin["Role"] ?? "Admin");
-            return Results.Ok(new { token });
+            return Results.Ok(new LoginResult(token));
         }
 
         private static string GenerateJwtToken(IConfiguration config, string login, string role)
@@ -64,9 +66,15 @@ internal static class AdminLoginRouteGroup
     }
 
     /// <summary>
-    ///     Данные для входа в админку.
+    ///     Данные для входа для администратора.
     /// </summary>
     /// <param name="Login">Логин.</param>
     /// <param name="Password">Пароль.</param>
-    public record LoginRequest(string Login, string Password);
+    public record struct LoginRequest(string Login, string Password);
+
+    /// <summary>
+    ///     Результат входа администратора.
+    /// </summary>
+    /// <param name="token">Токен.</param>
+    public record struct LoginResult(string token);
 }
