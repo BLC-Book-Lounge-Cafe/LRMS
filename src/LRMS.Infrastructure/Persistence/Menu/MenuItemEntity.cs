@@ -8,7 +8,7 @@ public class MenuItemEntity
     [Column("id")]
     public long Id { get; set; }
 
-    [Column("name")]
+    [Column("name", TypeName = "varchar(255)")]
     public required string Name { get; set; }
 
     [Column("category_id")]

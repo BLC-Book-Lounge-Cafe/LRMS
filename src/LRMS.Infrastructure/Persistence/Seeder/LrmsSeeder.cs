@@ -1,7 +1,6 @@
 ﻿using LRMS.Application.SpaceState.Dto;
 using LRMS.Infrastructure.Persistence.Books;
 using LRMS.Infrastructure.Persistence.Menu;
-using LRMS.Infrastructure.Persistence.SpaceSettings;
 using LRMS.Infrastructure.Persistence.SpaceState;
 using LRMS.Infrastructure.Persistence.Tables;
 using System.Text.Json;
@@ -14,29 +13,10 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
 
     public void Seed()
     {
-        AddSpaceSettings();
         AddSpaceState();
         AddBooks();
         AddTables();
         AddMenu();
-    }
-
-    private void AddSpaceSettings()
-    {
-        if (_dbContext.SpaceSettings.Any())
-            return;
-
-        var spaceSettings = new SpaceSettingsEntity
-        {
-            StartTime = DateTime.SpecifyKind(new(new DateOnly(), new TimeOnly(9, 0)), DateTimeKind.Utc),
-            EndTime = DateTime.SpecifyKind(new(new DateOnly(), new TimeOnly(21, 0)), DateTimeKind.Utc),
-            MinTableReservationTime = 60,
-            TableReservationPeriod = 30,
-            BookReservationPeriod = 30
-        };
-
-        _dbContext.SpaceSettings.Add(spaceSettings);
-        _dbContext.SaveChanges();
     }
 
     private void AddSpaceState()

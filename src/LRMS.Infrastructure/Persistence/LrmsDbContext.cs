@@ -1,6 +1,5 @@
 ﻿using LRMS.Infrastructure.Persistence.Books;
 using LRMS.Infrastructure.Persistence.Menu;
-using LRMS.Infrastructure.Persistence.SpaceSettings;
 using LRMS.Infrastructure.Persistence.SpaceState;
 using LRMS.Infrastructure.Persistence.Tables;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +16,6 @@ public class LrmsDbContext : DbContext
     {
     }
 
-    public virtual DbSet<SpaceSettingsEntity> SpaceSettings { get; set; }
     public virtual DbSet<BookEntity> Books { get; set; }
     public virtual DbSet<SpaceStateEntity> SpaceStates { get; set; }
     public virtual DbSet<TableEntity> Tables { get; set; }
@@ -27,5 +25,6 @@ public class LrmsDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         new MenuItemEntityTypeConfiguration().Configure(modelBuilder.Entity<MenuItemEntity>());
+        new SpaceStateEntityTypeConfiguration().Configure(modelBuilder.Entity<SpaceStateEntity>());
     }
 }

@@ -11,5 +11,7 @@ public class MenuItemEntityTypeConfiguration : IEntityTypeConfiguration<MenuItem
             .WithMany()
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.ToTable(t => t.HasCheckConstraint("CK_Menu_Element_Price", "price > 0"));
     }
 }
