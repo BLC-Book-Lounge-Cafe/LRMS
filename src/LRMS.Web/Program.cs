@@ -103,7 +103,10 @@ public partial class Program
         app.MapGraphQL();
 
         if (!IsBuildTask())
+        {
+            app.UseFileServer();
             InitializeDatabase(app.Services);
+        }
 
         app.Run();
     }

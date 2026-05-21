@@ -41,7 +41,7 @@ public class MusicManager : BackgroundService
 
     private void YnisonOnReceive(YnisonPlayer player, YnisonPlayer.ReceiveEventArgs args)
     {
-        var currentTrack = GetCurrentTack(args);
+        var currentTrack = GetCurrentTrack(args);
         if (_currentTrackDto.Name == currentTrack.Name && _currentTrackDto.ImageUrl == currentTrack.ImageUrl)
             return;
 
@@ -51,7 +51,7 @@ public class MusicManager : BackgroundService
         SaveInDb(currentTrack);
     }
 
-    private CurrentTrackDto GetCurrentTack(YnisonPlayer.ReceiveEventArgs args)
+    private CurrentTrackDto GetCurrentTrack(YnisonPlayer.ReceiveEventArgs args)
     {
         var index = args.State.PlayerState.PlayerQueue.CurrentPlayableIndex;
         var currentTrackId = args.State.PlayerState.PlayerQueue.PlayableList[index].PlayableId;

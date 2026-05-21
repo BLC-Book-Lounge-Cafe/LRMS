@@ -75,6 +75,6 @@ internal static class AdminLoginRouteGroup
     /// <summary>
     ///     Результат входа администратора.
     /// </summary>
-    /// <param name="token">Токен.</param>
-    public record struct LoginResult(string token);
+    /// <param name="Token">Токен.</param>
+    public record struct LoginResult(string Token);
 }
