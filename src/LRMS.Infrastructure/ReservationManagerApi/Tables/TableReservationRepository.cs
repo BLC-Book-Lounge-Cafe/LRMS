@@ -14,7 +14,10 @@ public class TableReservationRepository(LrmsDbContext dbContext, ITableApi table
     private readonly LrmsDbContext _dbContext = dbContext;
     private readonly ITableApi _tableApi = tableApi;
 
-    public async Task<IReadOnlyCollection<ReservationSlotDto>> GetSlots(long tableId, DateTime date, CancellationToken ct = default)
+    public async Task<GetTableReservationSlotsResponse> GetSlots(
+        long tableId,
+        DateTime date,
+        CancellationToken ct = default)
     {
         await CheckTableExists(tableId, ct);
 
@@ -23,7 +26,7 @@ public class TableReservationRepository(LrmsDbContext dbContext, ITableApi table
         var slots = await RestApiWrapper.CallApi<TableSlotsResponse>(
             _tableApi.GetTableReservationSlots(tableId, formattedDate, ct), ct);
 
-        return [.. slots.slots.Select(TableReservationMapper.ToDto)];
+        return new([.. slots.slots.Select(TableReservationMapper.ToDto)]);
     }
 
     public async Task CreateTableReservation(CreateTableReservationCommand tableReservationDto, CancellationToken ct = default)

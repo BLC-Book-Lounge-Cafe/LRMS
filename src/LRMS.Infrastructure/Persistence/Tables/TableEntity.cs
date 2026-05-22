@@ -10,7 +10,4 @@ public class TableEntity
 
     [Column("seats_count")]
     public byte SeatsCount { get; set; }
-
-    [Column("created_at")]
-    public DateTime CreatedAt { get; set; }
 }

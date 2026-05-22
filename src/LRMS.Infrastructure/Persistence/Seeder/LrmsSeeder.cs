@@ -299,33 +299,27 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
         {
             new()
             {
-                SeatsCount = 2,
-                CreatedAt = DateTime.UtcNow
+                SeatsCount = 2
             },
             new()
             {
-                SeatsCount = 6,
-                CreatedAt = DateTime.UtcNow
+                SeatsCount = 6
             },
             new()
             {
-                SeatsCount = 4,
-                CreatedAt = DateTime.UtcNow
+                SeatsCount = 4
             },
             new()
             {
-                SeatsCount = 2,
-                CreatedAt = DateTime.UtcNow
+                SeatsCount = 2
             },
             new()
             {
-                SeatsCount = 7,
-                CreatedAt = DateTime.UtcNow
+                SeatsCount = 7
             },
             new()
             {
-                SeatsCount = 2,
-                CreatedAt = DateTime.UtcNow
+                SeatsCount = 2
             },
         };
 

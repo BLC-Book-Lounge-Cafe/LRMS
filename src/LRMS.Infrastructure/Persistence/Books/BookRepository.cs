@@ -5,8 +5,6 @@ using LRMS.Infrastructure.Mappers;
 using LRMS.Infrastructure.ReservationManagerApi.ApiWrapper;
 using LRMS.Infrastructure.ReservationManagerApi.Books;
 using LRMS.Infrastructure.ReservationManagerApi.Books.Dto;
-using LRMS.Infrastructure.ReservationManagerApi.Tables;
-using LRMS.Infrastructure.ReservationManagerApi.Tables.Dto;
 using LRMS.Infrastructure.Util;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
