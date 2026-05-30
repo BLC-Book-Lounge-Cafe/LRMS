@@ -1,19 +1,16 @@
 services:
   postgres:
-    image: postgres:latest  # последняя версия PostgreSQL
+    image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_USER: test
-      POSTGRES_PASSWORD: test
-      POSTGRES_DB: lrms
-      POSTGRES_HOST: localhost
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d lrms -U test"]
+      test: ["CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -24,9 +21,15 @@ services:
       dockerfile: DockerFile
     container_name: backend
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5251
-      - ConnectionStrings__LrmsDbContext=Host=postgres;Port=5432;Database=lrms;Username=test;Password=test
+      - ConnectionStrings__LrmsDbContext=Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - YandexMusicOptions__Token=${YANDEX_MUSIC_TOKEN}
+      - ReservationManagerApiOptions__Address=${RESERVATION_MANAGER_ADDRESS}
+      - ReservationManagerApiOptions__Token=${RESERVATION_MANAGER_TOKEN}
+      - Jwt__Key=${JWT_KEY}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - Admins=[{"Login":${ADMIN_LOGIN},"Password":${ADMIN_PASSWORD}}]
     depends_on:
       postgres:
         condition: service_healthy
