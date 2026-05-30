@@ -18,7 +18,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: DockerFile
+      dockerfile: ./src/LRMS.Web/DockerFile
     container_name: backend
     environment:
       - ASPNETCORE_URLS=http://+:5251
