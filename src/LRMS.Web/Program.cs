@@ -115,7 +115,7 @@ public partial class Program
 
     private static void RegisterServices(IHostApplicationBuilder builder)
     {
-        builder.Services.UseNpgsql(builder.Configuration.GetConnectionString(nameof(LrmsDbContext)));
+        builder.UseNpgsql(builder.Configuration.GetConnectionString(nameof(LrmsDbContext)));
         builder.Services.RegisterApplicationServices();
         builder.Services.AddExceptionHandler<CommonExceptionHandler>();
     }

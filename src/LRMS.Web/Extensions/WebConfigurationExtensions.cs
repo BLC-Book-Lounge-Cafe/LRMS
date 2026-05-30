@@ -9,6 +9,7 @@ internal static class WebConfigurationExtensions
         public IServiceCollection ConfigureOptions()
         {
             services.AddOptions<YandexMusicOptions>().BindConfiguration("YandexMusicOptions");
+            services.AddOptions<ReservationManagerApiOptions>().BindConfiguration("ReservationManagerApiOptions");
             return services;
         }
     }

@@ -1,4 +1,5 @@
-﻿using LRMS.Application.Menu.Dto;
+﻿using LRMS.Application.Menu.Commands;
+using LRMS.Application.Menu.Dto;
 using LRMS.Infrastructure.Persistence.Menu;
 using Riok.Mapperly.Abstractions;
 
@@ -14,5 +15,15 @@ public static partial class MenuMapper
     public static partial MenuItemDto ToMenuItemDto(MenuItemEntity entity);
 
     [MapperIgnoreTarget(nameof(MenuItemEntity.CategoryId))]
+    [MapperIgnoreTarget(nameof(MenuItemEntity.Id))]
     public static partial MenuItemEntity ToEntity(MenuItemForCreateDto dto);
+
+    [MapperIgnoreTarget(nameof(MenuItemDto.Id))]
+    public static partial MenuItemDto ToDto(MenuItemForCreateDto dto);
+
+    [MapperIgnoreTarget(nameof(MenuCategoryDto.Id))]
+    public static partial MenuCategoryDto ToDto(CreateMenuCategoryCommand command);
+
+    [MapperIgnoreTarget(nameof(MenuCategoryDto.Id))]
+    public static partial MenuCategoryDto ToDto(UpdateMenuCategoryCommand command);
 }
