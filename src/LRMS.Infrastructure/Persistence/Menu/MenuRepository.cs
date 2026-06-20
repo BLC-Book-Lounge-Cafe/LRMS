@@ -26,6 +26,7 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
         {
             var itemEntity = MenuMapper.ToEntity(item);
             itemEntity.CategoryId = categoryEntity.Id;
+            itemEntities.Add(itemEntity);
         }
         await _dbContext.MenuItems.AddRangeAsync(itemEntities, ct);
         await _dbContext.SaveChangesAsync(ct);
