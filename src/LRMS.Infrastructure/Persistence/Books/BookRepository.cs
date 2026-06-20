@@ -1,5 +1,5 @@
 ﻿using LRMS.Application.Books.Dto;
-using LRMS.Application.Exceptions;
+using LRMS.Infrastructure.Exceptions;
 using LRMS.Infrastructure.GraphQL;
 using LRMS.Infrastructure.Mappers;
 using LRMS.Infrastructure.ReservationManagerApi.ApiWrapper;

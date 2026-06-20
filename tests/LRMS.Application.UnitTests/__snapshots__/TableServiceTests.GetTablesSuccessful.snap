@@ -1,0 +1,24 @@
+﻿{
+  "Tables": [
+    {
+      "Id": 1,
+      "SeatsCount": 1
+    },
+    {
+      "Id": 2,
+      "SeatsCount": 10
+    },
+    {
+      "Id": 4,
+      "SeatsCount": 6
+    },
+    {
+      "Id": 5,
+      "SeatsCount": 9
+    },
+    {
+      "Id": 6,
+      "SeatsCount": 5
+    }
+  ]
+}

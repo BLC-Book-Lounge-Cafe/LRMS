@@ -1,6 +1,5 @@
-﻿using LRMS.Application.Exceptions;
+﻿using LRMS.Infrastructure.Exceptions;
 using LRMS.Infrastructure.ReservationManagerApi.ApiWrapper.Dto;
-using LRMS.Infrastructure.ReservationManagerApi.Tables.Dto;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Json;
 

@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.Exceptions;
+using LRMS.Infrastructure.Exceptions;
 using LRMS.Infrastructure.Mappers;
 using LRMS.Infrastructure.Persistence;
 using LRMS.Infrastructure.ReservationManagerApi.ApiWrapper;

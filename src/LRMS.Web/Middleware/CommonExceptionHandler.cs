@@ -1,4 +1,5 @@
 ﻿using LRMS.Application.Exceptions;
+using LRMS.Infrastructure.Exceptions;
 using LRMS.Web.Contracts;
 using Microsoft.AspNetCore.Diagnostics;
 

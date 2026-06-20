@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace LRMS.Infrastructure.Persistence.Seeder;
 
-internal class LrmsSeeder(LrmsDbContext dbContext)
+public class LrmsSeeder(LrmsDbContext dbContext)
 {
     private readonly LrmsDbContext _dbContext = dbContext;
 
@@ -48,241 +48,229 @@ internal class LrmsSeeder(LrmsDbContext dbContext)
             {
                 Name = "Гарри Поттер и философский камень",
                 Author = "Дж. Роулинг",
-                ImagePath = "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=600&fit=crop"
+                ImagePath = "https://cdn.azbooka.ru/cv/w1100/3f68a41d-d7ec-4f1b-ae7b-36376eb66430.jpg"
             },
             new()
             {
                 Name = "Гарри Поттер и Тайная комната",
                 Author = "Дж. Роулинг",
-                ImagePath = "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/435204/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Гарри Поттер и узник Азкабана",
                 Author = "Дж. Роулинг",
-                ImagePath = "https://images.unsplash.com/photo-1506466010722-395aa2bef877?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/911380/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Властелин колец: Братство кольца",
                 Author = "Дж. Р. Р. Толкин",
-                ImagePath = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/899194/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Властелин колец: Две крепости",
                 Author = "Дж. Р. Р. Толкин",
-                ImagePath = "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/343795/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Властелин колец: Возвращение короля",
                 Author = "Дж. Р. Р. Толкин",
-                ImagePath = "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/899196/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Хоббит, или Туда и обратно",
                 Author = "Дж. Р. Р. Толкин",
-                ImagePath = "https://images.unsplash.com/photo-1533481405265-e9ce0c044abb?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/479670/cover.jpg/363-0"
             },
             new()
             {
                 Name = "451 градус по Фаренгейту",
                 Author = "Рэй Брэдбери",
-                ImagePath = "https://images.unsplash.com/photo-1495640388908-05fa85288e86?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/773894/cover.jpg/363-0"
             },
             new()
             {
                 Name = "1984",
                 Author = "Джордж Оруэлл",
-                ImagePath = "https://images.unsplash.com/photo-1544716278-e513176f20b5?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/790566/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Скотный двор",
                 Author = "Джордж Оруэлл",
-                ImagePath = "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/666748/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Преступление и наказание",
                 Author = "Фёдор Достоевский",
-                ImagePath = "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/863342/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Война и мир",
                 Author = "Лев Толстой",
-                ImagePath = "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/832939/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Анна Каренина",
                 Author = "Лев Толстой",
-                ImagePath = "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/603972/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Мастер и Маргарита",
                 Author = "Михаил Булгаков",
-                ImagePath = "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/942043/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Убить пересмешника",
                 Author = "Харпер Ли",
-                ImagePath = "https://images.unsplash.com/photo-1506880018603-1d42cdb6601d?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/594261/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Великий Гэтсби",
                 Author = "Фрэнсис Скотт Фицджеральд",
-                ImagePath = "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/850729/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Над пропастью во ржи",
                 Author = "Джером Д. Сэлинджер",
-                ImagePath = "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/1011596/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Моби Дик",
                 Author = "Герман Мелвилл",
-                ImagePath = "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=600&fit=crop"
+                ImagePath = "https://cdn.azbooka.ru/cv/w383/webp/3cbe0a3b-03fb-4872-ac70-e1e6ad106e09.webp"
             },
             new()
             {
                 Name = "Гордость и предубеждение",
                 Author = "Джейн Остин",
-                ImagePath = "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop"
+                ImagePath = "https://avatars.mds.yandex.net/get-kinopoisk-image/1898899/fa8474e9-35ca-447c-9dca-baf879ccaa9e/600x900"
             },
             new()
             {
                 Name = "Джейн Эйр",
                 Author = "Шарлотта Бронте",
-                ImagePath = "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/549739/cover.jpg/484-0"
             },
             new()
             {
                 Name = "Грозовой перевал",
                 Author = "Эмили Бронте",
-                ImagePath = "https://images.unsplash.com/photo-1506466010722-395aa2bef877?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/771312/cover.jpg/484-0"
             },
             new()
             {
                 Name = "Отверженные",
                 Author = "Виктор Гюго",
-                ImagePath = "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=600&fit=crop"
+                ImagePath = "https://cdn.azbooka.ru/cv/w383/webp/926299db-bc91-4f55-85d5-5c4707f71243.webp"
             },
             new()
             {
                 Name = "Собор Парижской Богоматери",
                 Author = "Виктор Гюго",
-                ImagePath = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/871948/cover.jpg/484-0"
             },
             new()
             {
                 Name = "Три мушкетёра",
                 Author = "Александр Дюма",
-                ImagePath = "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?w=400&h=600&fit=crop"
+                ImagePath = "https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/3ab9da68-46bf-4213-b79d-21cd0d8fb5b7/600x900"
             },
             new()
             {
                 Name = "Граф Монте-Кристо",
                 Author = "Александр Дюма",
-                ImagePath = "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=600&fit=crop"
+                ImagePath = "https://www.mann-ivanov-ferber.ru/assets/images/covers/89/34089/1.50x-thumb.png"
             },
             new()
             {
                 Name = "Дон Кихот",
                 Author = "Мигель де Сервантес",
-                ImagePath = "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop"
+                ImagePath = "https://avatars.mds.yandex.net/get-ott/1652588/2a0000019850f1b54b46ecc6719c6aa6e24f/600x900"
             },
             new()
             {
                 Name = "Ромео и Джульетта",
                 Author = "Уильям Шекспир",
-                ImagePath = "https://images.unsplash.com/photo-1495640388908-05fa85288e86?w=400&h=600&fit=crop"
-            },
-            new()
-            {
-                Name = "Гамлет",
-                Author = "Уильям Шекспир",
-                ImagePath = "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop"
+                ImagePath = "https://cdn.azbooka.ru/cv/w383/webp/b42d59bd-9c48-4a8c-8f63-2cdddb4b7392.webp"
             },
             new()
             {
                 Name = "Алиса в Стране чудес",
                 Author = "Льюис Кэрролл",
-                ImagePath = "https://images.unsplash.com/photo-1506880018603-1d42cdb6601d?w=400&h=600&fit=crop"
+                ImagePath = "https://www.moscowbooks.ru/image/book/720/w259/i720889.jpg?cu=20210525164602"
             },
             new()
             {
                 Name = "Питер Пэн",
                 Author = "Джеймс Мэттью Барри",
-                ImagePath = "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop"
+                ImagePath = "https://nukadeti.ru/content/images/static/tale400x400_m/6301_135.webp"
             },
             new()
             {
                 Name = "Винни-Пух",
                 Author = "Алан Милн",
-                ImagePath = "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=600&fit=crop"
+                ImagePath = "https://upload.wikimedia.org/wikipedia/ru/1/11/Winnie_Pooh.jpg"
             },
             new()
             {
                 Name = "Маленький принц",
                 Author = "Антуан де Сент-Экзюпери",
-                ImagePath = "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=600&fit=crop"
+                ImagePath = "https://artnow.ru/img/1515000/1515118.jpg"
             },
             new()
             {
                 Name = "Чума",
                 Author = "Альбер Камю",
-                ImagePath = "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/452840/cover.jpg/484-0"
             },
             new()
             {
                 Name = "Посторонний",
                 Author = "Альбер Камю",
-                ImagePath = "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/441765/cover.jpg/484-0"
             },
             new()
             {
                 Name = "Процесс",
                 Author = "Франц Кафка",
-                ImagePath = "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/790570/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Замок",
                 Author = "Франц Кафка",
-                ImagePath = "https://images.unsplash.com/photo-1533481405265-e9ce0c044abb?w=400&h=600&fit=crop"
-            },
-            new()
-            {
-                Name = "Сто лет одиночества",
-                Author = "Габриэль Гарсиа Маркес",
-                ImagePath = "https://images.unsplash.com/photo-1506466010722-395aa2bef877?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/901217/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Любовь во время холеры",
                 Author = "Габриэль Гарсиа Маркес",
-                ImagePath = "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/772096/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Бойня номер пять",
                 Author = "Курт Воннегут",
-                ImagePath = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/728183/cover.jpg/363-0"
             },
             new()
             {
                 Name = "Колыбель для кошки",
                 Author = "Курт Воннегут",
-                ImagePath = "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?w=400&h=600&fit=crop"
+                ImagePath = "https://imo10.labirint.ru/books/592559/cover.jpg/363-0"
             }
         };
 

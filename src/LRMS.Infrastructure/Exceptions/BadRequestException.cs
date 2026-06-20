@@ -1,4 +1,4 @@
-﻿namespace LRMS.Application.Exceptions;
+﻿namespace LRMS.Infrastructure.Exceptions;
 
 public class BadRequestException : Exception
 {

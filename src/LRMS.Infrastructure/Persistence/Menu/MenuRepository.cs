@@ -1,7 +1,7 @@
-﻿using LRMS.Application.Exceptions;
-using LRMS.Application.Menu;
+﻿using LRMS.Application.Menu;
 using LRMS.Application.Menu.Commands;
 using LRMS.Application.Menu.Dto;
+using LRMS.Infrastructure.Exceptions;
 using LRMS.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 
@@ -57,12 +57,12 @@ public class MenuRepository(LrmsDbContext dbContext) : IMenuRepository
         {
             var categoryDto = MenuMapper.ToMenuCategoryDto(category);
             categoryDto.MenuItems = itemsDictionary.TryGetValue(category.Id, out var items)
-                ? [.. items.Select(MenuMapper.ToMenuItemDto)]
+                ? [.. items.Select(MenuMapper.ToMenuItemDto).OrderBy(i => i.Name)]
                 : [];
             result.Add(categoryDto);
         }
 
-        return result;
+        return [.. result.OrderBy(c => c.Name)];
     }
 
     public async Task<MenuCategoryDto> UpdateMenuCategory(long id, UpdateMenuCategoryCommand command, CancellationToken ct = default)

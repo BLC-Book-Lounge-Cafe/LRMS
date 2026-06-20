@@ -105,6 +105,7 @@ public partial class Program
         if (!IsBuildTask())
         {
             app.UseFileServer();
+            app.MapFallbackToFile("index.html");
             InitializeDatabase(app.Services);
         }
 

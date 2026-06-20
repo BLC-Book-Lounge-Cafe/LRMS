@@ -1,0 +1,13 @@
+﻿{
+  "NoiseLevel": "Lively",
+  "WorkloadLevel": 116,
+  "Description": "Идет дождь, в зале тепло и пахнет корицей. Идеальное время для чтения с чашкой какао.",
+  "CurrentTrack": {
+    "Name": "Силуэт",
+    "Authors": [
+      "Ваня Дмитриенко",
+      "Аня Пересильд"
+    ],
+    "ImageUrl": "https://cdn-images.dzcdn.net/images/cover/dfc147ae4276f7aa692ae444f8c5300f/500x500-000000-80-0-0.jpg"
+  }
+}

@@ -4,5 +4,10 @@
     <Project Path="src/LRMS.Infrastructure/LRMS.Infrastructure.csproj" />
     <Project Path="src/LRMS.Web/LRMS.Web.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/LRMS.Application.UnitTests/LRMS.Application.UnitTests.csproj" Id="449fc61f-2e01-40ab-8260-aa830d7c6ff3" />
+    <Project Path="tests/LRMS.Infrastructure.IntegrationTests/LRMS.Infrastructure.IntegrationTests.csproj" Id="6b818f8c-71c4-47f9-a8a2-e8777fa484ee" />
+    <Project Path="tests/LRMS.IntegrationTests.Core/LRMS.IntegrationTests.Core.csproj" Id="bb09dbc6-f944-4547-b650-034ad0875a0c" />
+    <Project Path="tests/LRMS.Web.IntegrationTests/LRMS.Web.IntegrationTests.csproj" Id="8c98a586-214f-4ffd-b3ef-5e9733435679" />
+  </Folder>
 </Solution>

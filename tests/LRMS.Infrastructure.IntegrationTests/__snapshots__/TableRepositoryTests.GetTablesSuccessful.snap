@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Id": 1,
+    "SeatsCount": 2
+  },
+  {
+    "Id": 2,
+    "SeatsCount": 6
+  },
+  {
+    "Id": 3,
+    "SeatsCount": 4
+  },
+  {
+    "Id": 4,
+    "SeatsCount": 2
+  },
+  {
+    "Id": 5,
+    "SeatsCount": 7
+  },
+  {
+    "Id": 6,
+    "SeatsCount": 2
+  }
+]

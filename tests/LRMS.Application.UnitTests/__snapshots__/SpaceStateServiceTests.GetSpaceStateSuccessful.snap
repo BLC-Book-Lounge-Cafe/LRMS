@@ -1,0 +1,14 @@
+﻿{
+  "SpaceState": {
+    "NoiseLevel": "Lively",
+    "WorkloadLevel": 30,
+    "Description": "Description",
+    "CurrentTrack": {
+      "Name": "Track",
+      "Authors": [
+        "Author"
+      ],
+      "ImageUrl": "Url"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+﻿{
+  "Id": 2,
+  "Name": "Category",
+  "MenuItems": [
+    {
+      "Id": 13,
+      "Name": "Item1",
+      "Price": 50.0
+    },
+    {
+      "Id": 14,
+      "Name": "Item2",
+      "Price": 60.0
+    },
+    {
+      "Id": 15,
+      "Name": "Item3",
+      "Price": 70.0
+    },
+    {
+      "Id": 16,
+      "Name": "Item4",
+      "Price": 50.0
+    },
+    {
+      "Id": 17,
+      "Name": "Item5",
+      "Price": 150.0
+    }
+  ]
+}
